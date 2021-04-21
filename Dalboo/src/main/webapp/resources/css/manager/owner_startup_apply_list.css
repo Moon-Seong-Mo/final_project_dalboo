@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+.main-slide-container {
+	  overflow:hidden;
+      width:100%;
+      height: 100%;
+}
+
+a{
+   color: black;
+   text-decoration: none;
+}
+h2 {
+    margin-left: 20px;
+}
+
+
+table{
+	width: 80%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 50px auto;
+    font-size: 15px;
+    border-bottom: 1px solid black;
+    border: 0px;
+}
+
+
+th {
+    height: 40px;
+    background: #f2e5d9;
+    color: black;
+}
+
+
+td {
+    height: 40px;
+    border-bottom: 1px solid gray;
+    text-align: center;
+}
+
+.tr-content{
+	font-weight:bold;
+}
+.tr-content:hover{
+	
+}
+/* 페이징 */
+button:hover{
+	cursor: pointer;
+}  
+
+.numBtn{
+	border: 0px; 
+	background-color: rgb(190, 190, 190); 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+}
+	
+.Btn{
+	font-size: 15px;
+    padding: 8px;
+    background: rgb(244, 244, 244);
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: black;
+    font-family: 'Nanum Gothic';
+}
+
+#choosen{
+	border: 0px; 
+	background-color: rgb(227, 189, 152);
+	color:white; 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+	font-size: 20px;
+}
+
+.pagingArea {
+    margin-top: 30px;
+}
+
+
+
+#search{
+	border: 0px;
+    outline: 0px;
+    background: #f2e5d9;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+
+select#searchCate {
+    height: 35px;
+}
+
+input[type="text"] {
+    height: 25px;
+}
+
+div#searchArea {
+    margin-left: 50px;
+}
+
+

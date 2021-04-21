@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+#mypage_area{
+	margin : 0 auto;
+	width : 80%;
+}
+
+h1{
+	text-align: left;
+}
+
+#name-area{
+	font-family: "나눔고딕";
+	padding-bottom: 20px;
+	margin-top: 40px;
+}
+
+#myBtn-area{
+	margin-top: -40px;
+    text-align: right;
+}
+
+.myBtn{
+	background: #e3bd98;	/* #f4e5d6  연한거 */
+	border: none;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 15px;
+	width: 100px;
+	height: 30px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+#inform-area{
+	font-weight: bold;
+	font-size: 20px;
+	display: grid;
+	text-align: left;
+}
+
+.inform{
+	margin-bottom: 37px;
+}
+
+#pointBtn{
+    background: lightgray;
+	border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 19px;
+    width: 95px;
+    height: 39px;
+    position: relative;
+    margin-top: -35px;
+    left: 2%;
+    cursor: pointer;
+}
+
+#list-table{
+	padding-top: 35px;
+/* 	display: table; */
+	width: 1400px;
+	height: 300px;
+}
+
+#list-inner{
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#list-content{
+	display: inline-block;
+}
+
+#list-content >a{
+	width: 300px;
+    height: 240px;
+    float: left;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+
+.list-img{
+	width: 150px;
+	height:150px;
+}
+
+.list-name{
+	display: block;
+	font-size: 20px;
+	cursor: pointer;
+	margin-top:20px;
+	font-weight: bold;
+    color: black;
+}
+
+#leave-explain{
+	text-align: left;
+	font-size: 18px;
+	margin-top: 103px;
+}
+

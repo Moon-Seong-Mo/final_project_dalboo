@@ -1,0 +1,330 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="e" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>달보드레</title>
+
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resources/css/common/base.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resources/css/common/footer.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resources/css/common/content.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resources/css/etc/store_list.css">
+
+<!-- JQuery Modal Plugs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+
+<!-- Daum Address API -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+</head>
+<body>
+	<div class="wrap">
+		<%@ include file="/WEB-INF/views/common/nav.jsp" %>
+			<div id="content">
+			
+			<div id="store_list_area">
+			
+				<br>
+				<h1>매장 검색</h1>
+				<hr>
+				<div id="store_search">
+				
+					<div id="map"></div>
+					<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a76d669609bbdc285414a8c651ed614a"></script>
+					<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						    mapOption = {
+						        center: new kakao.maps.LatLng(37.555142, 126.970436), // 지도의 중심좌표
+						        level: 9, // 지도의 확대 레벨
+						        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+						    };
+				
+						// 지도를 생성한다 
+						var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+						var markerInfo = [
+							[37.524248, 127.029381, '<div style="padding:5px;">압구정점</div>'],
+							[37.655837, 126.771925, '<div style="padding:5px;">웨스턴돔점<div>'],
+							[37.424162, 126.882934, '<div style="padding:5px;">광명이케아점<div>']
+							
+						];
+
+						for(i in markerInfo){
+							// 지도에 마커를 생성하고 표시한다
+							var marker = new kakao.maps.Marker({
+							    position: new kakao.maps.LatLng(markerInfo[i][0], markerInfo[i][1]), // 마커의 좌표
+							    map: map // 마커를 표시할 지도 객체
+							});
+
+							// 인포윈도우를 생성합니다
+							var marker_area = new kakao.maps.InfoWindow({
+							    content : markerInfo[i][2]
+							});
+							  
+							// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+							marker_area.open(map, marker);
+						}
+						
+					</script>
+					
+					<form id="place">
+					
+					<h3>지역 검색</h3>
+					  <select onchange="categoryChange(this)" style="width:300px;height:50px;">
+					    <option value="none">시/도</option>
+					    <option value="seoul">서울특별시</option>
+					    <option value="busan">부산광역시</option>
+					    <option value="daegu">대구광역시</option>
+					    <option value="incheon">인천광역시</option>
+					    <option value="gwangju">광주광역시</option>
+					    <option value="daejeon">대전광역시</option>
+					    <option value="ulsan">울산광역시</option>
+					    <option value="saejongsi">세종특별자치시</option>
+					    <option value="gyeonggi">경기도</option>
+					    <option value="gangwon">강원도</option>
+					    <option value="chungbuk">충청북도</option>
+					    <option value="chungnam">충청남도</option>
+					    <option value="jeonbuk">전라북도</option>
+					    <option value="jeonnam">전라남도</option>
+					    <option value="gyeongbuk">경상북도</option>
+					    <option value="gyeongnam">경상남도</option>
+					    <option value="jeju">제주특별자치도</option>
+					  </select>
+					  
+					  <br><br>
+					  
+					  <select id="detailplace" style="width:300px;height:50px;">
+					  	<option>구/군</option>
+					  </select>
+					  
+					  <script>
+					  	function categoryChange(e) {
+					  		var seouldetail = ["마포구", "용산구", "서대문구", "은평구", "도봉구", "노원구", "성북구", "강북구", "성동구", "광진구", "중랑구", "송파구", "강동구", "강서구", "영등포구", "양천구", "구로구", "금천구", "종로구", "중구", "강남구", "서초구", "관악구", "동작구"];
+					  		var busandetail = ["강서구", "금청구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"];
+					  		var daegudetail = ["남구", "달서구", "달성군", "동구", "북구", "서구", "수성구", "중구"];
+					  		var incheondetail = ["강화군", "계양구", "남동구", "동구", "미추홀구", "부평구", "서구", "연수구", "옹진군", "중구"];
+					  		var gwangjudetail = ["광산구", "남구", "동구", "북구", "서구"];
+					  		var daejeondetail = ["대덕구", "동구", "서구", "유성구", "중구"];
+					  		var ulsandetail = ["남구", "동구", "북구", "울주군", "중구"];
+					  		var saejongdetail = ["가람동", "고운동", "금남면", "나성동", "다정동", "대평동", "도담동", "반곡동", "보람동", "부강면", "산울동", "새롬동", "소담동", "소정면", "아름동", "어진동", "연기면", "연동면", "연서면", "장군면", "전동면", "전의면", "조치원읍", "중촌동", "집현동", "한솔동", "합강동", "해밀동"];
+					  		var gyeonggidetail = ["가평군", "고양시", "과천시", "광명시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
+					  		var gangwondetail = ["강릉시", "고성군", "동해시", "삼척시", "속초시", "양구군", "양양군", "영월군", "원주시", "인제군", "정선군", "철원군", "춘천시", "태백시", "평찬군", "홍천군", "화천군", "횡성군"];
+					  		var chungbukdetail = ["괴산군", "단양군", "보은군", "영동군", "옥천군", "음성군", "제천시", "증평군", "진천군", "청주시", "충주시"];
+					  		var chungnamdetail = ["계룡시", "공주시", "금산군", "논산시", "당진시", "보령시", "부여군", "서산시", "아산시", "예산군", "천안시", "청양군", "태안군", "홍성군"];
+					  		var jeonbukdetail = ["고창군", "군산시", "김제시", "남원시", "무주군", "부안군", "순창군", "완주군", "익산시", "임실군", "장수군", "전주시", "정읍시", "진안군"];
+					  		var jeonnamdetail = ["강진군", "고흥군", "곡성군", "광양시", "구례군", "나주시", "단양군", "목포시", "무안군", "보성군", "순천시", "신안군", "여수시", "영광군", "영암군", "완도군", "장성군", "장흥군", "진도군", "함평군", "해남군", "화순군"]
+					  		var gyeongbukdetail = ["경산시", "경주시", "고령군", "구미시", "군위군", "김천시", "문경시", "봉화군", "상주시", "성주군", "안동시", "영덕군", "영양군", "영주시", "영천시", "예천군", "울릉군", "울진군", "의성군", "청도군", "청송군", "칠곡군", "포항시"];
+					  		var gyeongnamdetail = ["거제시", "거창군", "고성군", "김해시", "남해군", "밀양시", "사천시", "산청군", "양산시", "의령군", "진주시", "창녕군", "창원시", "통영시", "하동군", "함안군", "함양군", "합천군"];
+					  		var jejudetail = ["서귀포시", "제주시"];
+					  		
+					  		var target = document.getElementById("detailplace");
+					  		
+					  		if(e.value == "seoul") var d = seouldetail;
+					  		else if(e.value == "busan") var d = busandetail;
+					  		else if(e.value == "daegu") var d = daegudetail;
+					  		else if(e.value == "incheon") var d = incheondetail;
+					  		else if(e.value == "gwangju") var d = gwangjudetail;
+					  		else if(e.value == "ulsan") var d = ulsandetail;
+					  		else if(e.value == "daejeon") var d = daejeondetail;
+					  		else if(e.value == "saejongsi") var d = saejongdetail;
+					  		else if(e.value == "gyeonggi") var d = gyeonggidetail;
+					  		else if(e.value == "gangwon") var d = gangwondetail;
+					  		else if(e.value == "chungbuk") var d = chungbukdetail;
+					  		else if(e.value == "chungnam") var d = chungnamdetail;
+					  		else if(e.value == "jeonbuk") var d = jeonbukdetail;
+					  		else if(e.value == "jeonnam") var d = jeonnamdetail;
+					  		else if(e.value == "gyeongbuk") var d = gyeongbukdetail;
+					  		else if(e.value == "gyeongnam") var d = gyeongnamdetail;
+					  		else if(e.value == "jeju") var d = jejudetail;
+				
+					  		
+					  		target.options.length = 0;
+					  		
+					  		for(x in d) {
+					  			var opt = document.createElement("option");
+					  			opt.value = d[x];
+					  			opt.innerHTML = d[x];
+					  			target.appendChild(opt);
+					  		}
+					  	}
+					  	
+					  </script>
+					</form>
+					
+					<form id="shop">
+						<div>
+							<h3>매장 검색</h3>
+						</div>
+					
+						<input type="text" id="searchT">
+						<input type="button" value='검색'>
+						<br>
+						<b>총 <span style="font-size: 25px;">${ pi.listCount }</span>개의 매장이 있습니다.</b>
+					</form>
+					</div>
+					
+					
+					<fieldset>
+						<div class="store">
+							<table class="storeinfo">
+							<colgroup>
+								<col width="20%">
+								<col width="20%">
+								<col width="20%">
+								<col width="20%">
+								<col width="10%">
+							</colgroup>
+								<thead id="head">
+									<tr>
+										<th scope="col" class="name">지역</th>
+										<th scope="col">매장명</th>
+										<th scope="col">주소</th>
+										<th scope="col">전화번호</th>
+										<th scope="col">주문하기</th>
+									</tr>
+								</thead>
+								<tbody align ="center">
+								<e:if test="${ pi.listCount gt 0 }">
+									<e:forEach var="s" items="${ list }">
+									
+										<%-- <e:url var="deleteStore" value="deletestore.etc">
+											<e:param name="store_num" value="${ s.store_num }"/>
+										</e:url> --%>
+										<tr>
+											<td>${ s.store_region }</td>
+											<td>${ s.store_name }</td>
+											<td>${ s.store_address }</td>
+											<td>${ s.store_phone }</td>
+											<td>
+												<input type="button" value='주문' onclick="coffeeorder();">
+												
+												<!-- 모달창 수정 접근-->
+												<a href="#stoUpdate" onsubmit="return StoreData(this);" rel="modal:open" style="background: skyblue; border: 1px solid black; color: black;">수정</a>
+												
+												<form action="deletestore.etc" method="post" onsubmit="return warn();">
+													<input type="hidden" value="${ s.store_num }" name="store_num">
+													<button type="submit" style="background: red;">X</button>
+												</form>
+											</td>
+										</tr>
+									</e:forEach>
+								</e:if>
+								<e:if test="${ pi.listCount le 0 }">
+									<tr>
+										<td colspan="5">등록된 매장이 없습니다.</td>
+									</tr>
+								</e:if>
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+					
+					<!-- 모달창 매장 수정 -->
+					<div id="stoUpdate" class="modal">
+					<form action="updatestore.etc" method="post">
+						<div id="modal-header">매장 수정</div>
+						<div id="modal-body">
+							<span>매장명 : </span><input type="text" id="store_name" name="store_name" value="${ store.store_name }"><br>
+							<span>지역 : </span><input type="text" id="store_region" name="store_region" value="${ store.store_region }"><br>
+							<span>우편번호 : </span><input id="zonecode" type="text" value="" style="width:130px;" readonly/>
+							<input type="button" style="height: 35px; width: 95px;" onClick="daumMapAPI1();" value = "주소 찾기" /><br>
+							<span>상세주소 : </span><input type="text" id="store_address" name="store_address" value="${ store.store_address }" readonly/><br>
+							<span>전화번호 : </span><input type="text" id="store_phone" name="store_phone" value="${ store.store_phone }"><br>
+						</div>
+						<input type="submit" value="update">
+						<a href="#" rel="modal:close">Close</a>
+					</form>
+					</div>
+					
+					<!-- 모달창 매장 등록 -->
+					<div id="stoInsert" class="modal">
+					<form action="insertstore.etc" method="post">
+						<div id="modal-header">매장 등록</div>
+						<div id="modal-body">
+							<span>매장명 : </span><input type="text" id="store_name" name="store_name"><br>
+							<span>지역 : </span><input type="text" id="store_region" name="store_region"><br>
+							<span>우편번호 : </span><input id="zipcode" type="text" value="" style="width:130px;" readonly/>
+							<input type="button" style="height: 35px; width: 95px;" onClick="daumMapAPI2();" value = "주소 찾기" /><br>
+							<span>상세주소 : </span><input type="text" name="store_address" id="address" value="" readonly/><br>
+							<span>전화번호 : </span><input type="text" id="store_phone" name="store_phone"><br>
+						</div>
+						<input type="submit" value="insert">
+						<a href="#" rel="modal:close">Close</a>
+					</form>
+					</div>
+					
+					<!-- 모달창 등록 접근 -->
+					<p><a href="#stoInsert" rel="modal:open">매장 등록</a></p>
+
+					
+					<br><br>
+					
+					<!-- 페이징 넣기 -->
+			</div>
+		</div>
+	</div>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+</body>
+
+<script>
+// Daum Address API(수정)
+function daumMapAPI1() {
+	new daum.Postcode({
+		oncomplete:function(data) {
+			jQuery("#zonecode").val(data.zonecode); // 우편번호를 불러온다.
+			jQuery("#store_address").val(data.address); // 우편번호에 따른 상세 주소를 불러온다.
+		}
+	}).open();
+}
+// Daum Address API(등록)
+function daumMapAPI2() {
+	new daum.Postcode({
+		oncomplete:function(data) {
+			jQuery("#zipcode").val(data.zonecode); // 우편번호를 불러온다.
+			jQuery("#address").val(data.address); // 우편번호에 따른 상세 주소를 불러온다.
+		}
+	}).open();
+}
+
+function warn(){
+	if(confirm("매장을 폐점처리 하시겠습니까?")){
+		return true;
+	} else{
+		return false;
+	}
+}
+
+function StoreData(form){
+	// 매장 정보 값들을 js의 값안에 넣어두고 수정버튼 onclick js 객체안에서 pk값으로 비교해서 일치시 값 꺼내오기
+	var store_name = document.getElementById("store_name").value.;
+	var store_region = document.getElementById("store_region").value.;
+	var store_address = document.getElementById("store_address").value.;
+	var store_phone = document.getElementById("store_phone").value.;
+
+	if(store_name == ""){
+		alert("매장명을 입력해주세요.");
+		return false;
+	} else if(store_region == ""){
+		alert("지역을 입력해주세요.")
+		return false;
+	} else if(store_address == ""){
+		alert("주소를 입력해주세요.")
+		return false;
+	} else if(store_phone == ""){
+		alert("매장 번호를 입력해주세요.")
+		return false;
+	}
+
+	return true;
+}
+
+	function coffeeorder(){
+		alert("준비중 입니다.");
+		// 사이렌 오더로 연결할 예정(store_num을 넘기고 store_num을 통해 매장명 or 매장주소를 받아 결제에 사용)
+	}
+</script>
+</html>

@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+
+div#join {
+   width:1000px;
+   margin-top: 150px;
+   margin-right:auto;
+   margin-left:auto;
+}
+
+#content button[type="button"] {
+   background: lightgray;
+   border-radius: 10px;
+   border: 1px solid lightgray;
+   width: 80px;
+   height: 30px;
+   margin-left: 10px;
+}
+
+#content button[type=submit] {
+   background: rgb(227, 189, 152);
+   border-radius: 5px;
+   border: none;
+   width: 92px;
+   height: 40px;
+   color: black;
+   font-size: 17px;
+   font-weight: bold;
+}
+
+table {
+   width:100%;
+   margin-left: 150px;
+   margin-right: auto;
+   font-size: 20px;
+   text-align: left;
+   border-spacing: 30px;
+}
+
+div#agree {
+   text-align: left;
+   margin-left: 180px;
+   margin-top: 50px;
+}
+
+span.id {
+   display: none;
+   font-size: 12px;
+   top: 12px;
+   right: 10px;
+}
+
+span.pwd {
+   display: none;
+   font-size: 12px;
+   top: 12px;
+   right: 10px;
+}
+
+span.check {
+   display: none;
+   font-size: 12px;
+   top: 12px;
+   right: 10px;
+}
+
+
+#pwResult {
+   font-size: 12px
+}
+
+span.check {
+   color: orange;
+}

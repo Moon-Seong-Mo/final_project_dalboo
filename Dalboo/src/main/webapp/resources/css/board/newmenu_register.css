@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+#slide-div{
+   background-color: lightgray;
+   background-size:cover;
+}
+section {
+   margin-top: 60px;
+   margin-left: auto;
+   margin-right: auto;
+   min-height: 600px;
+   width: 800px;
+   text-align:center;
+}
+.outer {
+   margin-left: auto;
+   margin-right: auto;      
+   margin-top: 50px;   
+   margin-bottom: 50px;
+   min-height: 540px;
+   width: 1000px;
+   border: 3px solid black;
+}
+
+   .detailArea {
+   margin-top: 20px;
+   margin-left: 100px;
+   margin-right: 100px;
+   
+}
+#tableArea {
+   width: 100%;
+}
+#tableArea td{
+   padding:20px 0;
+}
+#tableArea > tr{
+   margin:20px auto;
+}
+#title-td {
+   margin-top: 20px;
+   font-weight: bold;
+   font-size: 15px;
+   text-align:left;
+}
+#writer-td {
+   text-align: left;
+}
+#date-td {
+   text-align: right;
+}
+
+input[type=text]{
+   height:25px;
+   width:250px;
+}
+input[type=file]{
+   display:none; 
+}
+.contentArea{
+   width: 400px;;
+   height: 190px;
+   float:left;
+   margin-left:10px;
+    margin-top: 10px;
+   font-size:20px;
+   resize:none;
+   border-radius:5px;
+}
+.menuname{
+   float:left;
+   margin-left:10px;
+    border-radius: 3px;
+}
+#subtitle{
+   outline: none;
+    resize: none;
+   font-size: 18px;
+    width: 428px;
+    height: 47px;
+}
+#sbm-btn{
+   background-color: #E3BD98;
+   border:0px;
+   width:100px;
+   height:50px;
+   font-size:15px;
+   font-weight:bold;
+   border-radius:5px;
+   cursor: pointer;
+}
+#res-btn{
+   background-color: lightgray;
+   border:0px;
+   width:100px;
+   height:50px;
+   font-size:15px;
+   font-weight:bold;
+   border-radius:5px;
+   cursor: pointer;
+}
+#btnDiv{
+       margin-right: 30px;
+          margin-top: 50px;
+}   
+
+
+#contentImgArea1:hover, #contentImgArea2:hover, #contentImgArea3:hover {cursor:pointer;}
+#contentImgArea1, #contentImgArea2, #contentImgArea3 {
+   width:200px; 
+   height:240px; 
+   border:2px dashed darkgray;
+   text-align:center; 
+   display:table-cell; 
+   vertical-align:middle;
+}
+
+.contentImgArea{
+   width:210px;
+   height:250px;
+   display:table-cell; 
+   vertical-align:middle;
+   text-align:center;
+   cursor:pointer;
+   
+}
+.deleteFormBtn{
+    margin-left: 30px;
+    font-size: 17px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #FF5A5A;
+    padding: 5px;
+    line-height: 14;
+}
+.contentArea{
+    display:inline-block;
+}
+#addFormBtn{
+    background-color: #000054;
+    border: 0px;
+    width: 80px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: white;
+    cursor: pointer;
+   }

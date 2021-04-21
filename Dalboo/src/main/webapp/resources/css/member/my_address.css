@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+h1{
+	text-align: left;
+}
+
+#address-table-area{
+	width: 80%;
+    margin: 0 auto;
+}
+
+#a-table{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#a-table input{
+	cursor: pointer;
+    width: 30px;
+    height: 18px;
+}
+
+#a-table th{
+	background: #f2e5d9;
+	font-size: 20px;
+}
+
+#a-table tr, td{
+	font-size: 18px;
+	padding: 10px;
+	border-bottom: 2px solid black;
+	height:70px;
+}
+
+#btn-area{
+	margin-left: 500px;
+    margin-top: 30px;
+}
+
+#set{
+	background: #e3bd98;
+	border: none;
+	border-radius: 5px;
+	margin-left: 230px;
+	width: 150px;
+	height: 30px;
+	font-size: 22px;
+	cursor: pointer;
+}
+
+#add{
+	background: #e3bd98;
+	border: none;
+	border-radius: 5px;
+	width: 100px;
+	height: 30px;
+	font-size: 22px;
+	cursor: pointer;
+}
+
+#delete{
+	background: red;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	margin-right: 20px;
+	width: 100px;
+	height: 30px;
+	font-size: 22px;
+	
+	cursor: pointer;
+}
+
+

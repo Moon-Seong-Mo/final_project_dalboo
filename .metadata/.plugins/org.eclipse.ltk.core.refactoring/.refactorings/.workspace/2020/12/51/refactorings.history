@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;임시 저장용&apos; to &apos;수정 및 테스트&apos;" description="Rename resource &apos;임시 저장용&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/임시 저장용" name="수정 및 테스트" stamp="1608123429344" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Dalbodre&apos; to &apos;임시저장소&apos;" description="Rename resource &apos;Dalbodre&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Dalbodre" name="임시저장소" stamp="1608123434780" updateReferences="true"/>
+</session>

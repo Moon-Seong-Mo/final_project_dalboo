@@ -1,0 +1,366 @@
+package com.kh.dalboo.order.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.kh.dalboo.common.PageInfo;
+import com.kh.dalboo.common.Pagination;
+import com.kh.dalboo.etc.model.exception.EtcException;
+import com.kh.dalboo.etc.model.vo.Store;
+import com.kh.dalboo.member.model.vo.Member;
+import com.kh.dalboo.menu.model.exception.MenuException;
+import com.kh.dalboo.order.model.service.SirenOrderService;
+import com.kh.dalboo.order.model.vo.SirenOrder;
+import com.kh.dalboo.order.model.vo.SirenOrderCart;
+import com.kh.dalboo.owner.model.vo.StoreStock;
+
+@SessionAttributes("loginUser")
+@Controller
+public class SirenOrderController {
+
+	@Autowired
+	private SirenOrderService soService;
+	
+	// 사이렌오더
+    @RequestMapping("siren_order.cf")
+    public ModelAndView siren_orderView(@RequestParam("store_num") int store_num ,ModelAndView mv) {
+       
+       ArrayList<StoreStock> AllMenuList = soService.AllMenuList(store_num);
+       
+       if(AllMenuList != null) {
+          mv.addObject("store_num", store_num);
+          mv.addObject("list", AllMenuList);
+          mv.setViewName("sirenorder_list");
+       } else {
+          throw new MenuException("사이렌 오더 접근에 실패하였습니다.");
+       }
+       return mv;
+    }
+	
+	@RequestMapping("choiceCoffee.cf")
+	public void choiceCoffee(HttpServletResponse resp, String imgPath,@RequestParam("store_num") int store_num) {
+		resp.setContentType("application/json; charset=UTF-8;");
+		ArrayList<StoreStock> coffee = soService.choiceCoffee(store_num);
+		
+		Gson gson = new Gson();
+		
+		try {
+			gson.toJson(coffee, resp.getWriter());
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("choiceAde.cf")
+	public void choiceAde(HttpServletResponse resp, String imgPath, @RequestParam("store_num") int store_num) {
+		resp.setContentType("application/json; charset=UTF-8;");
+		ArrayList<StoreStock> ade = soService.choiceAde(store_num);
+		
+		Gson gson = new Gson();
+		
+		try {
+			gson.toJson(ade, resp.getWriter());
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("choiceDessert.cf")
+	public void choiceDessert(HttpServletResponse resp, String imgPath, @RequestParam("store_num") int store_num) {
+		resp.setContentType("application/json; charset=UTF-8;");
+		ArrayList<StoreStock> dessert = soService.choiceDessert(store_num);
+		
+		Gson gson = new Gson();
+		
+		try {
+			gson.toJson(dessert, resp.getWriter());
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@RequestMapping("choiceNewMenu.cf")
+	public void choiceNewMenu(HttpServletResponse resp, String imgPath, @RequestParam("store_num") int store_num) {
+		resp.setContentType("application/json; charset=UTF-8;");
+		ArrayList<StoreStock> newMenu = soService.choiceNewMenu(store_num);
+		
+		Gson gson = new Gson();
+		
+		try {
+			gson.toJson(newMenu, resp.getWriter());
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	// 매장 조회
+	@RequestMapping("siren.cf")
+	public ModelAndView sirenStore(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int listCount = soService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Store> list = soService.selectList(pi);
+		if(list != null) {
+			mv.addObject("list", list);
+			mv.addObject("pi", pi);
+			mv.setViewName("sirenorder_store");
+		} else {
+			throw new EtcException("매장 조회에 실패하였습니다.");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("soCartList.cf")
+	public ModelAndView soCartList(@RequestParam("m_id") String m_id, @RequestParam("store_num") int store_num , ModelAndView mv) {
+		
+		SirenOrderCart soc = new SirenOrderCart();
+		soc.setM_id(m_id);
+		soc.setStore_num(store_num);
+		
+		ArrayList<SirenOrderCart> socList = soService.selectCartList(soc);
+				
+		int totalPrice = 0;
+		
+		for(SirenOrderCart cart : socList) {
+			int amount = cart.getMaterialprice();
+			int price = cart.getSo_cartAmount();
+			totalPrice += amount * price;
+		}
+		// 매장명 받아오기
+		Store s = soService.selectStoreList(store_num);
+		
+		mv.addObject("socList", socList);
+		mv.addObject("s", s);
+		mv.addObject("totalPrice", totalPrice);
+		mv.setViewName("sirenorder_order");
+		
+		return mv;
+	}
+	
+	@RequestMapping("soCartInsertGo.cf")
+	public String soCartInsertGo(@RequestParam("select_stockNum") int [] select_stockNum, @RequestParam("m_id") String m_id,
+									@RequestParam("store_num") int store_num) {
+		
+		SirenOrderCart soc1 = new SirenOrderCart();
+		soc1.setM_id(m_id);
+		soc1.setStore_num(store_num);
+		
+		ArrayList<SirenOrderCart> socList = soService.selectCartList(soc1);
+		
+		
+		int result = 0;
+		SirenOrderCart soc = new SirenOrderCart();
+		for(int i = 0; i< select_stockNum.length; i++) {
+			System.out.println("select_stockNum[i] soCartInsertGo.cf에서 확인 : " + select_stockNum[i]);
+			soc.setStock_num(select_stockNum[i]);
+			soc.setM_id(m_id);
+			soc.setStore_num(store_num);
+			
+			
+			result = soService.insertSOCart(soc);
+		}
+
+		
+		if(result > 0) {
+			return "redirect:soCartList.cf?store_num=" + store_num + "&m_id=" + m_id;
+		} else {
+			throw new EtcException("담기에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("soCartInsertBack.cf")
+	public String soCartInsertBack(@RequestParam("select_stockNum") int[] select_stockNum, @RequestParam("m_id") String m_id,
+								@RequestParam("store_num") int store_num) {
+		
+		int result = 0;
+		SirenOrderCart soc = new SirenOrderCart();
+		for(int i = 0; i< select_stockNum.length; i++) {
+			System.out.println("select_stockNum[i] soCartInsertback.cf에서 확인 : " + select_stockNum[i]);
+			soc.setStock_num(select_stockNum[i]);
+			soc.setM_id(m_id);
+			soc.setStore_num(store_num);
+			
+			result = soService.insertSOCart(soc);
+		}
+		
+		if(result > 0) {
+			return "redirect:siren_order.cf?store_num=" + store_num;
+		} else {
+			throw new EtcException("담기에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("minus.cf")
+	public String minusAmount(@RequestParam("so_cartNum") int so_cartNum) {
+		
+		SirenOrderCart soc = soService.selectCart(so_cartNum);
+		int store_num = soc.getStore_num();
+		String m_id = soc.getM_id();
+		
+		int result = soService.minusAmount(so_cartNum);
+		
+		if(result > 0) {
+			return "redirect:soCartList.cf?store_num=" + store_num + "&m_id=" + m_id;
+		} else {
+			throw new EtcException("수량 감소에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("plus.cf")
+	public String plusAmount(@RequestParam("so_cartNum") int so_cartNum) {
+		
+		SirenOrderCart soc = soService.selectCart(so_cartNum);
+		int store_num = soc.getStore_num();
+		String m_id = soc.getM_id();
+		
+		int result = soService.plusAmount(so_cartNum);
+		
+		if(result > 0) {
+			return "redirect:soCartList.cf?store_num=" + store_num + "&m_id=" + m_id;
+		} else {
+			throw new EtcException("수량 증가에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("deleteCart.cf")
+	public String soDelete(@RequestParam("so_cartNum") int so_cartNum) {
+		
+		SirenOrderCart soc = soService.selectCart(so_cartNum);
+		int store_num = soc.getStore_num();
+		String m_id = soc.getM_id();
+		
+		int result = soService.soDelete(so_cartNum);
+		
+		if(result > 0) {
+			return "redirect:soCartList.cf?store_num=" + store_num + "&m_id=" + m_id;
+		} else {
+			throw new EtcException("목록 삭제에 실패하였습니다.");
+		}
+	}
+	
+//	private class MyHash {
+//		String so_time, m_id;
+//		int store_num, stock_num;
+//		int totalprice;
+//		
+//		MyHash(String so_time, String m_id, int store_num, int stock_num, int totalprice){
+//			this.m_id = m_id;
+//			this.so_time = so_time;
+//			this.store_num = store_num;
+//			this.stock_num = stock_num;
+//			this.totalprice = totalprice;
+//		}
+//		
+//	}
+//	
+//	@RequestMapping("insertSirenOrder.cf")
+//	public void insertSirenOrder(@RequestParam(value="store_num[]") List<Integer> store_num,
+//								@RequestParam(value="stock_num[]") List<Integer> stock_num,
+//								@RequestParam("totalprice") int totalprice,
+//								HttpServletResponse resp, HttpSession session) {
+//		resp.setContentType("application/json; charset=UTF-8;");
+//		String m_id = ((Member)session.getAttribute("loginUser")).getId();
+//		
+//		SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
+//		String so_time = timeFormat.format(new Date(System.currentTimeMillis()));
+//		
+//		for(int i = 0; i < stock_num.size(); i++) {
+//			Map<String, MyHash> map = new HashMap<>();
+//			MyHash hashTest = new MyHash(m_id, so_time, store_num[i], stock_num[i], stock_num);
+//			map.put("testKey", hashTest);
+//			
+////			map.put("m_id", m_id);
+////			map.put("so_time", so_time);
+////			map.put("store_num", store_num);
+////			map.put("stock_num", stock_num);
+////			map.put("totalprice", totalprice);
+//			
+//		}
+//		
+//		
+//		
+//		for(int i = 0; i < stock_num.size(); i++) {
+//	         Map<String, List<Integer>> map = new HashMap<String, List<Integer>>();
+//	         map.put("store_num", store_num[i]);
+//	         map.put("stock_num", stock_num[i]);
+//	         
+//	         Map<String, Object> map2 = new HashMap<String, Object>();
+//	         map2.put("totalprice", totalprice);
+//	         map2.put("m_id", m_id);
+//	         map2.put("so_time", so_time);
+//	      }
+//		
+//		int result = soService.insertSirenOrder(so);
+//		
+//		// 주문이후 카트 비우기 (해당 아이디의 모든 카트를 비움)
+//		int result2 = soService.makeEmptyCart(m_id);
+//		
+//		JSONObject a_yo = new JSONObject();
+//		a_yo.put("result", result);
+//		
+//		try {
+//			PrintWriter out = resp.getWriter();
+//			out.println(a_yo);
+//			out.flush();
+//			out.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
+	@RequestMapping("insertSirenOrder.cf")
+	public void insertSirenOrder(@RequestParam("store_num") int store_num, @RequestParam("totalprice") int totalprice,
+			HttpServletResponse resp, HttpSession session) {
+		resp.setContentType("application/json; charset=UTF-8;");
+		String m_id = ((Member)session.getAttribute("loginUser")).getId();
+		
+		SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
+		String so_time = timeFormat.format(new Date(System.currentTimeMillis()));
+		
+		SirenOrder so = new SirenOrder();
+		so.setM_id(m_id);
+		so.setStore_num(store_num);
+		so.setSo_total_price(totalprice);
+		so.setSo_time(so_time);
+		
+		int result = soService.insertSirenOrder(so);
+		
+		JSONObject a_yo = new JSONObject();
+		a_yo.put("result", result);
+		
+		try {
+			PrintWriter out = resp.getWriter();
+			out.println(a_yo);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

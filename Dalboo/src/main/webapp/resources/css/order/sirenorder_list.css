@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+
+#sirenorder_list_area{
+    max-width: 1200px;
+    position: relative;
+    padding: 0px 150px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#sirenorder_list {
+    width: auto;
+    margin: 0 auto;
+}
+
+#bell {
+    margin-left: 89px;
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+
+div#hotcold {
+    margin-left: 31px;
+}
+
+.order-nav-list{
+	text-align:center;
+	margin:0 auto;
+}
+
+.order-nav-list >li{
+	text-align:center; 
+	display:inline-block;
+	font-size:20px;
+	cursor:pointer;	
+	padding:0 20px;
+}
+
+.order-nav-list li:hover{
+	font-weight:bold;
+}
+.coffeelist{
+	display: inline-block;
+}
+
+.coffeelist2>img{
+	width: 200px;
+    height: 200px;
+}
+#add{
+    width: 75px;
+    height: 40px;
+    background-color: lightgray;
+    border: 0;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-left: 49px;
+    cursor: pointer;
+}
+
+/* #add:hover{ */
+/* 	color: white; */
+/* 	font-size: 20px; */
+/* } */
+
+#ordercf{
+	width: 118px;
+    height: 40px;
+    background-color: rgb(227, 189, 152);
+    border: 0;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* #ordercf:hover{ */
+/* 	color: white; */
+/* 	font-size: 20px; */
+/* } */
+
+#mCheck{
+	cursor: pointer;
+}
+
+#mCheck:hover{
+	width: 23px;
+	height: 23px;
+}
+

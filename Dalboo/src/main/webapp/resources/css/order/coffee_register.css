@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+table#tableArea {
+    margin: 0 auto;
+    text-align: left;
+    font-size: 16px;
+}
+
+input#inputcontent {
+    width: 400px;
+}
+
+th {
+    padding: 6px;
+}
+
+#sbm-btn{
+	background: rgb(227, 189, 152); 
+	border-radius: 5px; 
+	font-size: 17px; 
+	border: none; 
+	cursor: pointer;
+}

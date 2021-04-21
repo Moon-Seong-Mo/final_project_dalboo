@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+div#introduce {
+	margin-top: 50px;
+    column-count: 2;
+    text-align: left;
+    width: 1200px;
+    margin-left: 100px;
+}
+
+div#introdue h3{
+	break-before:coumn;
+}
+
+img#coffee{
+	width: -webkit-fill-available;
+}
+
+div#introducecontent{
+	margin-top: 100px;
+}

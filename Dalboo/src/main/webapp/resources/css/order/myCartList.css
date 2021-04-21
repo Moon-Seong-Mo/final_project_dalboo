@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+.outer {
+	width: 1000px;
+	min-height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+}
+
+#goBtn {
+	width: 130px;
+	height: 30px;
+	background: rgb(227, 189, 152);
+	color: rgb(64, 64, 64);
+	font-size: 17px;
+	border: 0px;
+	border-radius: 5px;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	cursor: pointer;
+}
+
+hr {
+	margin-bottom: 40px;
+}
+
+#tableArea {
+	border-collapse: collapse;
+	width: 1000px;
+}
+
+td {
+	height: 170px;
+}
+
+.imgTd {
+	width: 100px;
+	height: 150px;
+}
+
+.rotnBtn {
+	background: rgb(224, 224, 224);
+	border: 1px solid gray;
+	border-radius: 5px;
+	width: 80px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.puchBtn {
+	background: rgb(227, 189, 152);
+	border: 0;
+	border-radius: 5px;
+	width: 80px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.name {
+	float: left;
+	font-size: 18px;
+	align: center;
+	margin-left: 30px;
+}
+
+.hrDiv {
+	height: 1px;
+	width: 100px;
+	background: rgba(75, 75, 75, 0.33);
+	margin-top: 10px;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#btn-area {
+	display: block;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.cartBtn {
+	cursor: pointer;
+}
+
+#Btn {
+	background: rgb(224, 224, 224);
+	color: rgb(33, 33, 33);
+	font-size: 15px;
+	border: 0px;
+	border-radius: 3px;
+	margin-right: 10px;
+	width: 100px;
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+#orangeBtn {
+	background: rgb(227, 189, 152);
+	color: rgb(33, 33, 33);
+	font-size: 15px;
+	border: 0px;
+	border-radius: 3px;
+	margin-right: 10px;
+	width: 100px;
+	height: 30px;
+	margin-bottom: 10px;
+}

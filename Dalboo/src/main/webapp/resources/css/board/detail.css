@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+#slide-div{
+	background-color: lightgray;
+	background-size:cover;
+}
+section {
+	margin-top: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 600px;
+	width: 800px;
+	text-align:center;
+}
+.outer {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;		
+	margin-bottom: 50px;
+	min-height: 540px;
+	width: 800px;
+	border: 3px solid black;
+}
+
+.detailArea {
+margin-top: 20px;
+margin-left: 100px;
+margin-right: 100px;
+	
+}
+#tableArea {
+	width: 100%;
+}
+#title {
+	margin-top: 20px;
+	font-weight: bold;
+	font-size: 30px;
+	text-align:center;
+}
+#views{
+	text-align:left;
+}
+
+#downloadfile{
+	text-align:right;
+}
+
+#writer {
+	text-align: left;
+}
+#date {
+	text-align: right;
+	font-size: 15px;
+}
+#contents {
+    resize: none;
+    border: none;
+    outline: none;
+    font-family: "나눔고딕";
+    font-size: 15px;
+    margin-bottom: 50px;
+    width: 100%;
+    margin-top: 10px;
+    border-top: 1px solid black;
+}
+
+
+#downloadfile{
+	
+}
+
+#sbm-btn{
+	background-color:#E3BD98;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	margin-left: 515px;
+	cursor: pointer;
+}
+#res-btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor: pointer;
+}
+#del-Btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor: pointer;
+}
+#btnDiv{
+	margin-bottom: 15px;
+    margin-right: 15px;
+}

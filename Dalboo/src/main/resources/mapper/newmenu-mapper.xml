@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="newMenuMapper">
+
+ 	<insert id="insertNmBoard">
+ 		insert into 
+ 		newmenu_of_month 
+ 		values(seq_nmid.nextval, #{title}, #{subTitle}, default, default, 
+ 				sysdate, sysdate, #{votEndDate}, default, #{mId})
+ 	</insert>
+ 	
+ 	<insert id="insertNfile">
+ 		insert into
+ 		newmenu_files
+ 		values(seq_nfid.nextval, #{originalName}, #{changName}, #{filePath}, #{menuName}, #{contentText}, default, default, seq_nmid.currval)
+ 	</insert>
+ 	
+ 	<insert id="addinsertNfile">
+ 		insert into
+ 		newmenu_files
+ 		values(seq_nfid.nextval, #{originalName}, #{changName}, #{filePath}, #{menuName}, #{contentText}, default, default, #{nNum})
+ 	</insert>
+ 	
+ 	<select id="getListCount" resultType="_int">
+		select count(*)
+		from newmenu_of_month 
+		where nm_status='Y'
+	</select>
+	
+	<select id="selectList" resultMap="newMenuResultSet">
+		select *
+		from newmenu_of_month 
+		where nm_status='Y'
+		order by nm_num desc
+	</select>
+	
+	<resultMap type="NewMenuBoard" id="newMenuResultSet">
+		<id column="NM_NUM" property="nNum"/>
+		<result column="NM_TITLE" property="title"/>
+		<result column="NM_CONTENT" property="subTitle"/>
+		<result column="NM_VIEWS" property="views"/>
+		<result column="NM_VOTE_STATUS" property="voteStatus"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="VOTEEND_DATE" property="votEndDate"/>
+		<result column="NM_STATUS" property="nStatus"/>
+		<result column="M_ID" property="mId"/>
+	</resultMap>
+	
+	<resultMap type="NewMenuFiles" id="newMenuFileResultSet">
+		<id column="FILE_NUM" property="fileNum"/>
+		<result column="ORIGINNAME" property="originalName"/>
+		<result column="CHANGENAME" property="changName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="MENU_NAME" property="menuName"/>
+		<result column="CONTENT_TEXT" property="contentText"/>
+		<result column="STATUS" property="status"/>
+		<result column="BOARD_LEVEL" property="boardLevel"/>
+		<result column="NM_NUM" property="nNum"/>
+		
+	</resultMap>
+	<resultMap type="Vote" id="VoteResultSet">
+		<id column="V_NUM" property="vNum"/>
+		<result column="V_COUNT" property="vCount"/>
+		<result column="VOTE_DATE" property="voteDate"/>
+		<result column="V_STATUS" property="vStatus"/>
+		<result column="FILE_NUM" property="fileNum"/>
+		<result column="NM_NUM" property="nNum"/>
+		<result column="M_ID" property="mId"/>
+	</resultMap>
+	
+	<update id="updateNmFilesContent">
+		update newmenu_files
+		set menu_name = #{menuName}, content_text = #{contentText}
+		where file_num = #{fileNum}
+	</update>
+	
+	<update id="addReadCount">
+		update newmenu_of_month 
+		set nm_views = nm_views + 1
+		where nm_num = #{nNum} 
+	</update>
+	
+	<select id="selectBoard" resultMap="newMenuResultSet">
+		select * 
+		from newmenu_of_month 
+		where nm_num=#{nNum} and nm_status='Y'
+	</select>
+	
+	<select id="selectFile" resultMap="newMenuFileResultSet">
+		select *
+		from newmenu_files
+		where nm_num=#{nNum} and status='Y'
+	</select>
+	
+	<update id="deleteNewMenuBoard">
+		update newmenu_of_month
+		set nm_status='N'
+		where nm_num=#{nNum}
+	</update>
+	
+	<update id="updateNmboard">
+		update newmenu_of_month
+		set nm_title=#{title}, nm_content =#{subTitle}
+		where nm_num=#{nNum}
+	</update>
+	
+	<update id="updateNfile">
+		update newmenu_files
+		set originname=#{originalName},
+		changename=#{changName},
+		file_path=#{filePath},
+		menu_name=#{menuName},
+		content_text=#{contentText}
+		where file_num=#{fileNum}		
+	</update>
+	
+	<insert id="voteStatus">
+		insert into 
+ 		vote 
+ 		values(seq_vno.nextval, default, sysdate, 'Y', #{fileNum}, 
+ 				#{nNum}, #{mId})
+	</insert>
+	
+	<update id="addVoteCount">
+		update vote 
+		set v_count = v_count + 1
+		where m_id = #{mId}
+		and file_num = #{fileNum} 
+	</update>
+	
+	<update id="voteMenuDelete">
+		update newmenu_files
+		set status='N'
+		where file_num = #{fNum}
+	</update>
+	
+	<select id="voteStatusChk" resultType="_int">
+		select count(*)
+		from vote
+		where m_id=#{mId} and nm_num= #{nNum}
+	</select>
+	
+	<update id="rollbackUpdate">
+		update newmenu_files
+		set status='Y'
+		where nm_num =#{nNum}
+	</update>
+	
+	<update id="voteStatusEnd">
+		update newmenu_of_month
+		set nm_vote_status = 'N'
+		where nm_num =#{nNum}
+	</update>
+	
+	<select id="voteTotalCount" resultMap="VoteResultSet">
+      SELECT *
+      FROM VOTECOUNT
+      WHERE NM_NUM = #{nNum}
+      AND ROWNUM = 1
+   </select>
+	
+	<select id="voteFileSelect" resultMap="newMenuFileResultSet">
+		select *
+		from newmenu_files
+		where file_num = #{fNum}
+	</select>
+	
+	<select id="selectMainVoteList" resultMap="newMenuResultSet">
+	<![CDATA[
+		select *
+		from (select * from newmenu_of_month
+		order by nm_num desc)
+		where nm_status='Y'
+		and rownum <= 3
+		]]>
+	</select>
+	
+	
+	<select id="boardVoteStatus" resultType="string">
+      select nm_vote_status
+      from newmenu_of_month
+      where nm_num= #{nNum}
+   </select>
+	
+	
+	
+	
+	
+</mapper>

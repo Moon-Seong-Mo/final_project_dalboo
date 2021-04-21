@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="menuMapper">
+	<select id="selectList" resultMap = "menuResultSet">
+		select * 
+		from menu
+		where m_status='Y' and m_type='커피' 
+	</select>
+	
+	<select id="selectList2" resultMap = "menuResultSet">
+		select * 
+		from menu
+		where m_status='Y' and m_type='디저트' 
+	</select>
+	
+	<select id="selectList3" resultMap = "menuResultSet">
+		select * 
+		from menu
+		where m_status='Y' and m_type='음료' 
+	</select>
+	
+	<select id="selectList4" resultMap = "menuResultSet">
+		select * 
+		from menu
+		where m_status='Y' and m_type='신메뉴' 
+	</select>
+	
+
+	
+	
+	<resultMap type="Menu" id="menuResultSet">
+      <id column="M_NUM" property="mNum"/>
+      <result column="M_TYPE" property="mType"/>
+      <result column="M_NAME" property="mName"/>
+      <result column="M_PRICE" property="mPrice"/>
+      <result column="M_CAFFEINE" property="mCaffeine"/>
+      <result column="M_CALORIE" property="mCalorie"/>
+      <result column="M_SODIUM" property="mSodium"/>
+      <result column="M_SUGAR" property="mSugar"/>
+      <result column="M_CAPACITY" property="mCapacity"/>
+      <result column="M_CONTENT" property="mContent"/>
+      <result column="ORIGINAL_FILENAME" property="originalFileName"/>
+      <result column="RENAME_FILENAME" property="renameFileName"/>
+      <result column="M_STATUS" property="mStatus"/>
+   </resultMap>
+   
+   
+    <select id="AllMenuList" parameterType="Menu" resultMap="menuResultSet">
+      SELECT *
+      FROM MENU
+      WHERE M_STATUS= 'Y'
+   </select>
+   
+   
+   <insert id="insertMenu">
+      insert into menu
+      values(seq_mnum.nextval, #{mType} , #{mName}, #{mPrice}, #{mCaffeine},#{mCalorie},
+      #{mSodium},#{mSugar},#{mCapacity},#{mContent}, #{originalFileName}, #{renameFileName},default)
+   </insert>
+   
+   <update id="deleteCoffee">
+   		update menu
+   		set m_status='N'
+   		where m_num=#{mNum}
+   </update>
+   <update id="deleteDessert">
+   		update menu
+   		set m_status='N'
+   		where m_num=#{mNum}
+   </update>
+   <update id="deleteAde">
+   		update menu
+   		set m_status='N'
+   		where m_num=#{mNum}
+   </update>
+   <update id="deleteNewmenu">
+   		update menu
+   		set m_status='N'
+   		where m_num=#{mNum}
+   </update>
+   
+</mapper>

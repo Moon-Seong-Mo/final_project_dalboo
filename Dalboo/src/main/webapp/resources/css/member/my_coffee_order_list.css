@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+div#order-list-area {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+}
+ 
+h2{margin-bottom:50px;}
+
+#order-list{
+	display: inline-block;
+	width: 100%;
+}
+
+#order-list ul>li{
+	font-size: 20px;
+}
+
+#order-status-ing{
+	float:right;
+	width: 130px;
+    height: 50px;
+    text-align: center;
+    background: rgb(227, 189, 152);
+    border-radius: 10px;
+}
+
+#order-status-end{
+	float:right;
+	width: 130px;
+    height: 50px;
+    text-align: center;
+    background: lightgray;
+    border-radius: 10px;
+}
+
+.order-status{
+	font-size: 20px;
+    position: relative;
+    top: 12px;
+}
+
+#empty{
+	width: 100%; 
+	border: 1px solid;
+	font-size: 20px;
+}
+
+
+/* 페이징 */
+
+.pagingArea {
+	margin-top: 100px;
+}
+
+.numBtn {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(244, 244, 244);
+	color: gray;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+}
+
+.Btn {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(244, 244, 244);
+	color: gray;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+}
+
+#choosen {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(227, 189, 152);
+	color: white;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+}
+
+
+#dd{
+  background-color: #fff;
+  border-top: 2px dashed #bbb;
+}
+

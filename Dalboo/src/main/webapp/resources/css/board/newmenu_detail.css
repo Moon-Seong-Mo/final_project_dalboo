@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+#slide-div{
+		background-color: lightgray;
+		background-size:cover;
+	}
+section {
+	margin-top: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 600px;
+	width: 100%;
+	text-align:center;
+}
+.outer {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;		
+	margin-bottom: 50px;
+	min-height: 540px;
+	width: 1100px;
+	
+}
+
+	.detailArea {
+	margin-top: 20px;
+	margin:0 auto;
+	text-align:center;
+	
+}
+#tableArea {
+	width: 100%;
+	margin:0 auto;
+	text-align:center;
+	border-collapse: collapse;
+}
+#first-tr td{
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	padding-top:25px;
+	padding-bottom:25px;
+	
+}
+#title {
+	margin-top: 20px;
+	font-weight: bold;
+	font-size: 20px;
+	text-align:left;
+}
+
+#date {
+	text-align: right;
+	border-bottom: 1px solid black;
+}
+
+#sbm-btn{
+	background-color: #E3BD98;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor:pointer;
+}
+#res-btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor:pointer;
+}
+#del-Btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+#vote_btn{
+	background-color: #E3BD98;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor:pointer;
+}
+input[type=checkbox]{
+	width:25px;
+	height:200px;
+}
+#text-area{
+	border:none;
+	click:none;
+	resize: none;
+	outline: none;
+	cursor:default;
+}
+.check-menu{
+	margin:50px auto;
+}
+
+#btnDiv{
+	margin-right:30px;
+}
+
+p {
+    font-size: 25px;
+    font-weight: bold;
+}

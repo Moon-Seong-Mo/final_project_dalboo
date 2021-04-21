@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+a{
+	text-decoration:none;
+	color:black;
+}
+
+h2 {
+    margin-left: 20px;
+}
+
+#develop_notice{
+	width: 95%;
+}
+
+table{
+	width: 95%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+    margin: 0 auto;
+    margin-left: 20px;
+}
+
+th {
+   height: 50px;
+   background: rgb(52, 73, 94);
+   color:white;
+}
+
+td {
+    height: 40px;
+    border-bottom: 1px solid gray;
+    text-align: center;
+}
+
+/* 페이징 */
+button:hover{
+	cursor: pointer;
+}  
+
+.numBtn{
+	border: 0px; 
+	background-color: rgb(190, 190, 190); 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+}
+	
+.Btn{
+	border: 0px; 
+	background-color: rgb(190, 190, 190); 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+}
+
+#choosen{
+	border: 0px; 
+	background-color: rgb(52, 73, 94); 
+	color:white; 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+}
+
+
+
+
+
+#register{
+	border-radius: 5px;
+    color: white;
+    border: 0px;
+    outline: 0px;
+    background: rgb(44, 62, 80);
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    float: right;
+    margin-top: 50px;
+    margin-right: 50px;
+}
+#delete{
+	border: 0px;
+   outline: 0px;
+   background: orangered;
+   font-size: 15px;
+   font-weight: bold;
+   color:white;
+   cursor: pointer;
+   width: 80px;
+   height: 30px;
+   margin-left:1034px;
+}
+
+#search{
+/* 	border: 0px; */
+/*    outline: 0px; */
+/*    background: rgb(44, 62, 80); */
+/*    font-size: 15px; */
+/*    font-weight: bold; */
+/*    color:white; */
+/*    cursor: pointer; */
+/*    width: 80px; */
+/*    height: 30px; */
+
+	border: 0px;
+   border-radius : 5px;
+   background: rgb(44, 62, 80);
+   font-size: 15px;
+   color: white;
+   cursor: pointer;
+   width: 80px;
+   height: 30px;
+}
+
+
+select#searchCate {
+/*     height: 35px; */
+	text-align-last:center;
+   width:70px;
+   height: 35px;
+}
+
+input[type="text"] {
+    height: 25px;
+}
+
+div#searchArea {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.pagingArea {
+    margin-top: 30px;
+    margin-left: 80px;
+}
+

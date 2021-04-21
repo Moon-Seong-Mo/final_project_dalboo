@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+/*슬라이드 영역 */
+	#slide-div{
+		background-color: lightgray;
+		background-size:cover;
+	}
+
+/* 컨텐츠 영역 */
+.outer {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;		
+	margin-bottom: 50px;
+	min-height: 540px;
+	width: 1100px;
+	
+}
+
+/* 테이블까지 감싸는 div영역 */
+	.detailArea {
+	margin-top: 20px;
+	margin:0 auto;
+	text-align:center;
+	
+}
+/* 테이블  */
+#tableArea {
+	width: 100%;
+	margin:0 auto;
+	text-align:center;
+	border-collapse: collapse;
+}
+/* 제목, 조회수, 날짜 */
+#first-tr td{
+	border-top:2px solid black;
+	border-bottom:2px solid black;
+	padding-top:25px;
+	padding-bottom:25px;
+	
+}
+#title {
+	margin-top: 20px;
+	font-weight: bold;
+	font-size: 20px;
+	text-align:left;
+}
+#date {
+	text-align: right;
+	border-bottom: 1px solid black;
+}
+/* 주황색 영역 */
+#contentArea {
+	width: 100%;
+	resize: none;
+	border: none;
+	outline: none;
+	font-size:20px;
+	click: none;
+	margin-top:50px;
+	margin-bottom:50px;
+	padding-bottom:100px;
+	text-align:center;
+	background-color:#feb283;
+}
+/*컨텐츠 영역에 들어가는 로고 */
+#content-logo{
+	width:200px;
+	height:80px;
+	float:right;
+}
+/* 투표함 */
+#vote-box{
+	width:300px;
+	height:300px;
+	margin-top:53px;
+	
+}
+/* 몇월의 투표인지 나타내는 라벨 */
+/* #month-label{ */
+/* 	background-color:#fc6000; */
+/* 	width:400px; */
+/* 	height:60px; */
+/* 	color:white; */
+/* 	font-size:30px;  */
+/* 	font-weight:bold; */
+/* 	margin-left: auto; */
+/* 	margin-right: auto; */
+/* 	line-height:60px; */
+/* } */
+
+
+/* #month-label { */
+/*     background-color: #fc6000; */
+/*     width: 224px; */
+/*     height: 54px; */
+/*     color: white; */
+/*     font-size: 20px; */
+/*     font-weight: bold; */
+/*     margin-left: auto; */
+/*     margin-right: auto; */
+/*     line-height: 60px; */
+/* } */
+#month-label {
+    width: auto;
+    height: 50px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+/* 첫번째 라벨 */
+#result-label1{
+	 width:auto;
+	 height:50px;
+	 color:white; 
+	 font-size:60px; 
+	 font-weight:bold;
+	 margin-top:50px;
+	 margin-left:auto;
+	 margin-right:auto;
+}
+#result-label2{
+	 width:auto;
+	 height:auto;
+	 color:#de772d; 
+	 font-size:35px; 
+	 font-weight:bold;
+	 text-align:center;
+	 margin-top:50px;
+	 margin-left:auto;
+	 margin-right:auto;
+}
+/* 마지막 라벨 */
+#result-label3{
+	 width:auto;
+	 height:auto;
+	 color:black; 
+	 font-size:35px; 
+	 font-weight:bold;
+	 text-align:center;
+	 margin-top:50px;
+	 margin-left:auto;
+	 margin-right:auto;
+}
+#sbm-btn{
+	background-color: #E3BD98;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+}
+#res-btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+}
+#del-Btn{
+	background-color: #FF5A5A;
+    border: 0px;
+    width: 100px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: white;
+}
+
+#btnDiv{
+	margin-right:30px;
+}

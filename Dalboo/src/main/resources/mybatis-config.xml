@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.kh.dalboo.member.model.vo.Address" alias="Address"/>
+		
+		<typeAlias type="com.kh.dalboo.board.model.vo.Board" alias="Board"/>
+		
+		<typeAlias type="com.kh.dalboo.manager.model.vo.CoffeeStock" alias="CoffeeStock"/>
+		<typeAlias type="com.kh.dalboo.mdProduct.model.vo.Cart" alias="Cart"/>
+		
+		<typeAlias type="com.kh.dalboo.mdProduct.model.vo.Files" alias="Files"/>
+		<typeAlias type="com.kh.dalboo.etc.model.vo.Faq" alias="FAQ"/>
+		
+		
+		<typeAlias type="com.kh.dalboo.board.model.vo.Reply" alias="Reply"/>
+		
+		<typeAlias type="com.kh.dalboo.board.model.vo.NewMenuBoard" alias="NewMenuBoard"/>
+		<typeAlias type="com.kh.dalboo.board.model.vo.NewMenuFiles" alias="NewMenuFiles"/>
+		
+		
+		<typeAlias type="com.kh.dalboo.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.dalboo.menu.model.vo.Menu" alias="Menu"/>
+		<typeAlias type="com.kh.dalboo.mdProduct.model.vo.MdProduct" alias="MdProduct"/>
+		<typeAlias type="com.kh.dalboo.mdProduct.model.vo.MdOrder" alias="MdOrder"/>
+		
+		<typeAlias type="com.kh.dalboo.etc.model.vo.Store" alias="Store"/>
+		<typeAlias type="com.kh.dalboo.owner.model.vo.StoreStock" alias="StoreStock"/>
+		<typeAlias type="com.kh.dalboo.order.model.vo.SirenOrderCart" alias="SirenOrderCart"/>
+		<typeAlias type="com.kh.dalboo.order.model.vo.SirenOrder" alias="SirenOrder"/>
+		<typeAlias type="com.kh.dalboo.etc.model.vo.StartUp" alias="StartUp"/>
+		
+		<typeAlias type="com.kh.dalboo.owner.model.vo.OwnerNewMenuBoard" alias="OwnerNewMenuBoard"/>
+		<typeAlias type="com.kh.dalboo.owner.model.vo.OwnerNewMenuFiles" alias="OwnerNewMenuFiles"/>
+		<typeAlias type="com.kh.dalboo.owner.model.vo.OwnerNotice" alias="OwnerNotice"/>
+		
+		
+		<typeAlias type="com.kh.dalboo.board.model.vo.Vote" alias="Vote"/>
+		
+		<typeAlias type="com.kh.dalboo.member.model.vo.PointHistory" alias="PointHistory"/>
+		
+		
+		
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mapper/board-mapper.xml"/>
+		<mapper resource="mapper/etc-mapper.xml"/>
+		<mapper resource="mapper/owner-mapper.xml"/>
+		<mapper resource="mapper/siren-mapper.xml"/>
+		<mapper resource="mapper/member-mapper.xml"/>
+		<mapper resource="mapper/menu-mapper.xml"/>
+		<mapper resource="mapper/mdProduct-mapper.xml"/>
+		<mapper resource="mapper/manager-mapper.xml"/>
+		<mapper resource="mapper/newmenu-mapper.xml"/>
+	</mappers>
+</configuration>

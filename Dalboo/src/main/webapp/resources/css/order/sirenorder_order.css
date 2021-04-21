@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+#sirenorder_order_wrap{
+	margin : 0 auto;
+	width : 80%	
+}
+hr{
+	width: 95%;
+}
+#order{
+	margin-top: 100px;
+    margin-right: 84%;
+    margin-bottom: 50px;
+}
+.orderlist {
+    border-bottom: 1px solid #303030;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 25px;
+    text-align: center;
+}
+
+.deleteBtn{
+	background: red;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.amountBtn{
+	width: 30px;
+	height: 30px;
+	border: none;
+	border-radius: 15px;
+	font-size: 20px;
+	cursor: pointer;
+	
+}
+
+.menuAmount{
+	border: 1px solid;
+	text-align: center;
+	font-size: 25px;
+	width: 110px;
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+fieldset, img {
+	border: none;
+}
+
+#total{
+	margin-left: 65%;
+    font-size: 30px
+}
+
+#head{
+	background-color: rgb(227, 189, 152);
+}
+
+.selectshop{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#cancel{
+	width: 75px; 
+	height:40px; 
+	background-color: lightgray; 
+	border:0;
+	font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#buy{
+	width: 110px;
+    height: 40px;
+    background-color: rgb(227, 189, 152);
+    border: 0;
+    font-size: 19px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#map {
+    width: 1125px;
+    height: 400px;
+}
+
+#myPoint{
+	display: inline-block;
+	width: 500px;
+    margin-right: 56%;
+    margin-top: 30px;
+    font-size: 25px
+}
+
+#paymentAll{
+	margin-top: 50px;
+	margin-bottom: 50px;
+	width: 100%;
+	height: 150px;
+	border: 2px solid rgb(224, 224, 224);
+	border-radius: 10px;
+}
+
+.totalTable{
+	width: 100%;
+	height: 150px;
+	text-align: center;
+}
+
+.totalpayment{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.textColor1 {
+	color: rgb(224, 224, 224);
+	font-size: 30px;
+}
+
+.textColor2 {
+	color: rgb(227, 189, 152);
+}
+
+
+a{
+	color: black;
+    text-decoration: none;
+}
+
+#storeName{
+	font-weight: bold;
+    background: #f2e5d9;
+    border-radius: 10px;
+}
+
+.totalPrice{
+	font-weight: bold;
+    background: #f2e5d9;
+    border-radius: 10px;
+}

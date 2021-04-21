@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+#orderlist_area{
+	margin : 0 auto;
+	width : 80%;
+}
+
+h1{
+	text-align: left;
+}
+
+#explain{
+	text-align: left;
+}
+
+#orderBtn-area tr>td>input{
+	font-size: 25px;
+	background: none;
+	color: lightgray;
+	border: none;
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+#orderBtn-area tr>td>input:hover{
+	color: black;
+}
+
+#dateBtn-area tr>td>input{
+	font-size: 17px;
+    font-weight: bold;
+    background: none;
+    width: 120px;
+    height: 40px;
+	border: 2px solid lightgray;
+	cursor: pointer;
+}
+
+#dateBtn-area tr>td>input:hover{
+	border: 2px solid black;
+}
+
+#mdOrder-table{
+	font-size: 20px;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    text-align: center;
+}
+
+#mdOrder-table thead{
+	border-bottom: 2px solid;
+	border-collapse: collapse;
+}
+
+#mdorder-img{
+	width: 120px;
+	height: 250px;
+}
+
+#mdOrder-table tr>td>label{
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	font-weight: bold;
+	border: none;
+}
+
+/* 페이징 처리 */
+#pagingArea{
+    margin-top: 30px;
+}
+
+button:hover{
+   cursor: pointer;
+}  
+
+.numBtn{
+   border: 0px; 
+   background-color:rgb(244, 244, 244);
+   width:30px; 
+   height:30px; 
+   border-radius:5px;
+}
+   
+.Btn{
+   border: 0px; 
+   background-color: rgb(244, 244, 244); 
+   width:30px; 
+   height:30px; 
+   border-radius:5px;
+}
+
+#choosen{
+   border: 0px; 
+   background-color: rgb(227, 189, 152); 
+   color:white; 
+   width:30px; 
+   height:30px; 
+   border-radius:5px;
+}
+
+#order_ing b{
+	margin-right:10px;
+}
+#order_ing {
+	font-size:23px;
+}

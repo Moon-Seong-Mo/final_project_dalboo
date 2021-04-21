@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+
+h2{
+   margin-left:20px;
+}
+
+#deveolop_register_area{
+   margin : 0 auto;
+}
+
+#header-div{
+   width:800px;
+   margin:20px auto;
+}
+#table-div{
+   width:800px;
+   margin:0 auto;
+   background-color:white;
+   border-radius:10px;
+   paddin:20px;
+}
+#title-text{
+   display:inline-block;
+   width:80px;
+   margin:0;
+}
+#title{
+   display:inline-block;
+   width:500px;
+   margin:0 auto;
+    height: 30px;
+}
+input[type=file]{
+   display:none; 
+}
+form{
+   width:800px;
+   margin:0 auto;
+}
+table#deveolop_register {
+    margin:0 auto;
+    min-height:600px;
+    border-collapse: collapse;
+     width:800px;
+}
+
+
+.contentFormArea{
+   text-align:center;
+   margin:20px auto;
+}
+
+.contentArea{
+   width: 400px;
+   height: 239px;
+   outline: none;
+   font-size:20px;
+   resize:none;
+   background-color: #e1e1e1;
+   border-radius:5px;
+}
+.contentArea1{
+   width: 400px;
+   height: 239px;
+   outline: none;
+   font-size:20px;
+   resize:none;
+   background-color: #e1e1e1;
+   border-radius:5px;
+   margin-left:5px;
+}
+#addFormBtn{      
+     border: 0px;
+     outline: 0px;
+     background: rgb(44, 62, 80);
+     font-size: 15px;
+     font-weight: bold;
+     color:white;
+     width: 120px;
+     height: 45px;
+     border-radius: 5px;
+     margin:0;
+     cursor: pointer;
+}
+.deleteFormBtn{
+   border:1px solid gray;
+   border-radius:5px;
+   width:30px; 
+   height:30px;
+   padding:5px;
+   font-size:20px;
+   font-weight:bold;
+   cursor:pointer;
+   display:block;
+   margin:auto;
+   cursor: pointer;
+   color:red;
+}
+#register{
+  border: 0px;
+  outline: 0px;
+  background: rgb(44, 62, 80);
+  font-size: 15px;
+  font-weight: bold;
+  color:white;
+  width: 80px;
+  height: 45px;
+  border-radius: 5px;
+  cursor: pointer;
+   
+}
+#cancel{
+   border: 0px;
+   outline: 0px;
+   background: lightgray;
+   font-size: 15px;
+   font-weight: bold;
+   color:black;
+   width: 80px;
+   height: 45px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.imgs{
+   cursor:pointer;
+   border:dotted black;
+   background-color: #e1e1e1;
+   border-radius:5px;
+}
+#addphoto{
+   float:right;
+}
+#btnArea{
+   margin-top:10px;
+   margin-left:500px;
+   margin-bottom:100px;
+}

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ownerMapper">
+	
+	
+	<resultMap type="StoreStock" id="StoreStockResultSet">
+		<id column="STOCK_NUM" property="stock_num"/>
+		<result column="MATERIALNAME" property="materialName"/>
+		<result column="MATERIALAMOUNT" property="materialAmount"/>
+		<result column="SS_UPLOAD_DATE" property="uploadDate"/>
+		<result column="STORE_NUM" property="store_num"/>
+		<result column="ALLSTOCKNUM" property="allStockNum"/>
+	</resultMap>
+	
+	<resultMap type="CoffeeStock" id="CoffeeStockResultSet">
+		<id column="ALLSTOCKNUM" property="allStockNum"/>
+		<result column="MATERIAL_TYPE" property="materialType"/>
+		<result column="MATERIALNAME" property="materialName"/>
+		<result column="MATERIALAMOUNT" property="materialAmount"/>
+		<result column="MATERIALPRICE" property="materialPrice"/>
+		<result column="ORIGINAL_FILENAME" property="originalFileName"/>
+		<result column="RENAME_FILENAME" property="renameFileName"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+	</resultMap>
+	
+	
+	<!--가맹주 주문하기(가맹주가 재료들을 발주함) -->
+	<insert id="ownerinsertMaterial">
+		insert into store_stock
+		values(SEQ_STOCKNUM.nextval,#{materialName}, #{materialAmount}, sysdate, #{store_num},default , #{allStockNum})
+	</insert>
+   
+	<!--관리자 현재고(본사에 있는 재료 리스트들 나열) -->
+	<select id="selectCoffeeStock" resultMap="CoffeeStockResultSet">
+		select *
+		from coffeestock
+		order by allstocknum
+	</select>
+	
+	<!--가맹주 현재고(가맹주가 가지고 있는 재료 리스트들 나열) -->
+	<select id="selectCoffeeInventory" resultMap="StoreStockResultSet">
+		select *
+		from store_stock
+		where status='승인'  and store_num = #{store_num}<!-- 관리자가 승인하면 Y , 거절하면 N, 기본값은 W로 waiting 대기 -->
+		order by stock_num 
+	</select>
+	
+	
+	<!--발주현황(가맹주가 발주 하였는데 발주현황의 상태  나열) -->
+	<select id="selectOrderStatus" resultMap="StoreStockResultSet">
+		select *
+		from store_stock
+		where store_num = #{storeNum}
+		order by stock_num desc
+	</select>
+		
+	<update id="updateStock">
+		UPDATE STORE_STOCK
+		SET MATERIALAMOUNT = MATERIALAMOUNT - #{materialAmount}
+		WHERE STOCK_NUM = #{stock_num}
+	</update>
+	
+	
+	
+	
+	
+	
+	<!--  지원 -->
+	<insert id="insertOwnerNotice">
+		insert into OWNER_NOTICE
+		values(SEQ_OW_NOTICENUM.nextval, #{owTitle}, #{owContent}, #{originFileName}, #{renameFileName}, sysdate, default, default)
+	</insert>		
+		
+		
+	<select id="selectNoticeCount" resultType="_int">
+		select count(*)
+		from owner_notice
+		where ow_status = 'Y'
+	</select>	
+
+	<resultMap type="OwnerNotice" id="ONResultSet">
+		<id property="onNo" column="ow_notice_no"/>
+		<result property="owTitle" column="ow_title"/>
+		<result property="owContent" column="OW_CONTENT"/>
+		<result property="originFileName" column="ORIGINAL_FILENAME"/>
+		<result property="renameFileName" column="RENAME_FILENAME"/>
+		<result property="owDate" column="OW_CREATE_DATE"/>
+		<result property="onCount" column="ow_notice_count"/>
+		<result property="owStatus" column="OW_STATUS"/>
+	</resultMap>
+	
+	<select id="selectOnwerNoticeList" resultMap="ONResultSet">
+        select *
+		from owner_notice
+		where ow_status = 'Y'
+		order by OW_CREATE_DATE desc, OW_NOTICE_NO desc
+	</select>	
+
+	<update id="updateNoticeCount">
+		update owner_notice
+		set ow_notice_count = ow_notice_count + 1
+		where ow_notice_no = #{onNO}
+	</update>	
+	
+	<select id="selectOwnerNoticeDetail" resultMap="ONResultSet">
+		select *
+		from owner_notice
+		where ow_notice_no = #{onNo}
+	</select>
+	
+	
+	
+	<update id="deleteNotice">
+		update owner_notice
+		set OW_STATUS = 'N'
+		where ow_notice_no = #{onNo}
+	</update>
+	
+	<update id="modifyNotice">
+		update owner_notice
+		set ow_title=#{owTitle}, OW_CONTENT=#{owContent}, RENAME_FILENAME=#{renameFileName}
+		<if test="originFileName != null">
+			 ,ORIGINAL_FILENAME=#{originFileName}
+		</if>
+		where ow_notice_no = #{onNo}
+	</update>
+	
+	
+	<select id="getSearchResultCount" resultType="_int">
+	
+		select count(*)
+		from owner_notice
+		where ow_status = 'Y'
+		<if test="title != null">
+			and ow_title like '%' || #{title} || '%'
+		</if> 
+		<if test="content != null">
+			and OW_CONTENT like '%' || #{content} || '%'
+		</if>
+	</select>
+	
+	
+	<select id="selectSearchResultList" resultMap="ONResultSet">
+		select *
+		from owner_notice
+		where ow_status = 'Y'
+		<if test="title != null">
+			and ow_title like '%' || #{title} || '%'
+		</if> 
+		<if test="content != null">
+			and OW_CONTENT like '%' || #{content} || '%'
+		</if>
+	</select>
+	
+	
+	
+	<!--  메인페이지 공지사항 5개 이하로만 출력 -->
+	<select id="selectOwnerMainNoticeList" resultMap="ONResultSet">
+        SELECT *
+		FROM OWNER_NOTICE
+		WHERE OW_STATUS = 'Y' AND
+		<![CDATA[ rownum < 6]]>	
+		ORDER BY OW_CREATE_DATE DESC , OW_NOTICE_NO DESC
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 성모 -->
+  <!-- 전체 매장 총 매출액 -->
+   <select id="selectSalesAll" resultMap="salesResultSet">
+      SELECT TOTALPRICE
+      FROM STORE
+      WHERE RANK_CODE = 1
+   </select>
+   
+   
+   <!-- 매장별 top5 매출액 -->
+   <select id="selectdoughnut" resultMap="salesResultSet">
+      <![CDATA[
+      SELECT TOTALPRICE , STORE_NUM, STORE_NAME , RANK_CODE
+      FROM (
+            SELECT TOTALPRICE , STORE_NUM, STORE_NAME, RANK_CODE
+            FROM STORE
+            ORDER BY TOTALPRICE DESC
+        )  
+      WHERE RANK_CODE = 1 AND TOTALPRICE > 0 AND ROWNUM <= 5
+      ]]>
+   </select>
+   
+   
+   
+  
+   
+   <!-- 본인 매장 현재재고 막대 그래프 -->
+   <select id="selectBarChart" resultMap="StoreStockResultSet">
+      <![CDATA[
+      SELECT ROWNUM, MATERIALNAME, MATERIALAMOUNT, SS.STORE_NUM
+      FROM STORE_STOCK SS
+         JOIN STORE S ON(S.STORE_NUM = SS.STORE_NUM)
+      WHERE ROWNUM <= 10 AND SS.STORE_NUM = #{store_num}
+         AND STATUS= '승인'
+      ]]>
+   </select>
+   
+   
+   
+   
+   
+   
+   <!-- 매장별 매출액 -->
+   <select id="selectSalesStore" resultMap="salesResultSet">
+      SELECT TOTALPRICE
+      FROM STORE
+      WHERE STORE_NUM = #{store_num}
+   </select>
+   
+   <resultMap type="Store" id="salesResultSet">
+      <id 	property="store_num" 		column="STORE_NUM"/>
+		<result property="store_region" 	column="STORE_REGION"/>
+		<result property="store_name" 		column="STORE_NAME"/>
+		<result property="store_address" 	column="STORE_ADDRESS"/>
+		<result property="store_phone" 		column="STORE_PHONE"/>
+		<result property="store_create_date" column="STORE_CREATE_DATE"/>
+		<result property="store_modify_date" column="STORE_MODIFY_DATE"/>
+		<result property="store_login_code" column="STORE_LOGIN_CODE"/>
+		<result property="store_status" 	column="STORE_STATUS"/>
+		<result property="rank_code" 		column="RANK_CODE"/>
+		<result property="totalprice"		column="TOTALPRICE"/>
+   </resultMap>
+   
+   <!--  비밀번호 암호화 하여 로그인 -->
+   <select id="adminLogin" resultMap="memberResultSet">
+      select *
+      from member
+      where m_id=#{userId}
+           and m_status='Y'
+   </select>
+   <!--  쿼리 작성할 때 컬럼명이랑 일치하는지 꼭 확인하기 ㅠ -->
+   
+   <resultMap type="Member" id="memberResultSet">
+      <id property="id" column="M_ID"/>
+      <result property="pwd" column="M_PWD"/>
+      <result property="nickName" column="M_NICKNAME"/>
+      <result property="name" column="M_NAME"/>
+      <result property="phone" column="M_PHONE"/>
+      <result property="email" column="M_EMAIL"/>
+      <result property="point" column="M_POINT"/>
+      <result property="rank_code" column="M_RANK_CODE"/>
+      <result property="enrollDate" column="ENROLL_DATE"/>
+      <result property="modifyDate" column="MODIFY_DATE"/>
+      <result property="mStatus" column="M_STATUS"/>
+   </resultMap>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+</mapper>

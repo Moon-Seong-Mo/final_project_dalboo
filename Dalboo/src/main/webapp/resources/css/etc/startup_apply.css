@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/* �뒳�씪�씠�뱶 �쁺�뿭 */
+#slide-div{
+	background-color: lightgray;
+	background-size:cover;
+}
+/* 以묒븰 �쟾泥� �쁺�뿭 */
+section{
+	width:100%; 
+	min-height:600px;
+	margin:50px auto; 
+	vertical-align:middle; 
+	
+}
+/* 而⑦뀗痢� �쁺�뿭 */
+#content{
+	margin:auto;
+	width:1300px; 
+	min-height:500px; 
+	text-align:center;
+}
+/* 李쎌뾽愿��젴 �젙蹂댁쁺�뿭 */
+#com-info{
+	width:830px;
+	margin: auto;
+	margin-top:50px;
+	padding:10px;
+	min-height: 100px; 
+	text-align:left;		
+	background-color:#f2e5d9;
+}
+/* 李쎌뾽 �뤌 �뀒�씠釉�  */
+#Apply-table{
+	width:800px;
+	margin:10px auto;
+	border-collapse: collapse;
+}
+#Apply-table td{
+	border-top:1px solid black;
+	padding:10px;
+}
+/* input�깭洹� css */
+input::placeholder{
+	width:250px;
+}
+input[type=text]{
+	width:350px;
+}
+input[type=tel]{
+	width:350px;
+}
+input[type=email]{
+	width:350px;
+}
+#sbm-btn{
+	background-color: #E3BD98;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+}
+#res-btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+}

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+/*슬라이더 영역 */	
+.main-slide-container {
+	  overflow:hidden;
+      width:100%;
+      height: 100%;
+}
+/* 컨텐츠영역 */
+#contentArea{
+	width:1200px; 
+	min-height:500px; 
+	background-color:white; 
+	margin:10px auto;
+	text-align:center;
+}
+/* 페이지 제목 */
+#page-title{
+	width:100%; 
+	text-align:left; 
+}
+/* div 리스트 */
+.list-div{
+	width:230px; 
+	height:300px; 
+	background-color:#f2e5d9;
+	display:inline-block;
+	margin:15px;
+	margin-left:auto;
+	margin-right:auto;
+	vertical-align:middle;
+	text-align:left;
+}
+/* 李쎌뾽臾몄쓽 */
+#Inquiry-area{
+	width:1200px; 
+	min-height:300px; 
+	margin:10px auto;
+	text-align:center;
+}
+/* 李쎌뾽臾몄쓽 div 由ъ뒪�듃 */
+.process-div{
+	width:230px; 
+	height:150px; 
+	background-color:#f2e5d9;
+	display:inline-block;
+	margin:20px;
+	margin-left:auto;
+	margin-right:auto;
+	vertical-align:middle; 
+}
+/* hr */
+.seq{
+	border-bottom:1px solid lightgray;
+	text-align:left;
+	font-size:30px;	
+	margin-left:10px;
+}
+/* 踰꾪듉 */
+#sbm-btn{
+	background-color: #E3BD98;
+	border:0px;
+	width:300px;
+	height:50px;
+	font-size:20px;
+	font-weight:bold;
+	border-radius:5px;
+	margin-bottom:20px;
+}
+
+button{
+	cursor: pointer;
+}
+/* div안에 있는 strong, p태그 묶는 클래스 */
+.div-text{
+	margin-left:10px;
+}

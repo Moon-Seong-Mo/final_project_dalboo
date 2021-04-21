@@ -1,0 +1,270 @@
+@charset "UTF-8";
+
+
+thead {
+    font-size: 35px;
+}
+
+th {
+    font-size: 35px;
+}
+
+h2{
+   margin-left:20px;
+}
+
+input#addBtn {
+    font-size: 26px;
+    font-weight: bold;
+    width: 89px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background: #2f4f4f;
+    color: white;
+    cursor: pointer;
+    margin-top: 52px;
+    margin-left: 187px;
+}
+
+input#updBtn {
+    font-size: 26px;
+    font-weight: bold;
+    width: 89px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background: #2f4f4f;
+    color: white;
+    cursor: pointer;
+    margin-top: 52px;
+    margin-left: 150px;
+}
+input#cenBtn {
+   
+    font-size: 26px;
+    font-weight: bold;
+    width: 89px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background: lightgray;
+    color: white;
+    cursor: pointer;
+    margin-top: 52px;
+}
+#material_order_area{
+   margin: 0 auto;
+   width : 100%;
+/*    position: fixed; */
+}
+#stock-area{
+   overflow: auto;
+   overflow-x: hidden;
+   position: relative;
+    float: left;
+    width: 40%;
+    height: 600px;
+    border-right: 1px solid lightgray;
+    display: flex;
+   justify-content: center;
+    flex-direction: column;
+   text-align:center;
+   margin-left: 20px;
+}
+
+#stock-area table{
+   max-height: 600px;
+}
+
+input.orderBtn {
+    font-size: 23px;
+    font-weight: bold;
+    background: #2f4f4f;
+    color: white;
+    width: 33px;
+    height: 33px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#order-area{
+   position: relative;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+#order-table{
+   overflow: auto;
+    overflow-x: hidden;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+}
+#order-table table{
+    font-size: 24px;
+    text-align: left;
+    margin-left: 70px;
+}
+
+#order-area button{
+   background: red;
+   color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+
+
+
+.amonut{
+   font-size: 15px;
+    height: 30px;
+}
+
+.chkName {
+    outline: none;
+    font-size: 20px;
+    height: 25px;
+    width: 239px;
+    text-align: left;
+    border-radius: 5px;
+    margin: 12px auto;
+    padding: 3px;
+    cursor:pointer;
+}
+.chkName:hover{
+   color:red;
+}
+
+
+
+/* input[type="text"] { */
+/*     font-size: 15px; */
+/*     height: 25px; */
+/*     width: 120px; */
+/* } */
+
+input.name {
+    font-size: 20px;
+    height: 25px;
+    width: 300px;
+    border-radius: 5px;
+    margin-top: 12px;
+    padding: 3px;
+}
+input.amount {
+    font-size: 20px;
+    height: 25px;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 12px auto;
+    padding: 3px;
+}
+input.deleteBtn {
+    background: #2f4f4f;
+    color: white;
+    width: 33px;
+    height: 33px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 9px;
+}
+
+#material1{
+   font-size: 22px;
+   width: 50%;
+}
+
+td#material_name {
+    font-size: 22px;
+    width: 50%;
+}
+
+
+#btn-area{
+   text-align: center;
+}
+
+#btn-area button{
+   font-size: 26px;
+   font-weight: bold;
+    width: 150px;
+    height: 62px;
+    border: none;
+    border-radius: 10px;
+    background: lightgray;
+    cursor: pointer;
+}
+
+#btn-area input{
+   font-size: 26px;
+   font-weight: bold;
+    width: 150px;
+    height: 62px;
+    border: none;
+    border-radius: 10px;
+    background: #2f4f4f;
+    color: white;
+    cursor: pointer;
+    margin-top: 70px;
+}
+
+
+
+.amount{
+   outline:none;
+}
+
+
+tr#table_top {
+    font-weight: bold;
+    height: 73px;
+}
+
+
+
+input#price {
+    font-size: 20px;
+    height: 25px;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+    margin:12px auto;
+    padding: 3px;
+}
+
+
+select#menu_cate {
+    font-size: 18px;
+    height: 38px;
+    width: 312px;
+    border-radius: 5px;
+    margin-top: 12px;
+    padding: 3px;
+}
+#titleImg{
+   border:none;
+}
+div#titleImgArea {
+    width: 300px;
+    height: 300px;
+    border:2px dashed black;
+    cursor:pointer;
+}
+#updBtn,#cenBtn{
+      display:none;
+   }

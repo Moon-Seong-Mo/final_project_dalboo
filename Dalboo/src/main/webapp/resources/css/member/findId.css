@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+div#findid {
+    margin-top: 150px;
+}
+
+input#username {
+    width: 300px;
+    height: 30px;
+    margin-left: 100px;
+}
+input#userphone {
+    width: 300px;
+    height: 30px;
+    margin-left: 45px;
+}
+input#useremail {
+    width: 300px;
+    height: 30px;
+    margin-left: 82px;
+}
+
+
+button#findid{
+    background: rgb(227, 189, 152);
+    border: none;
+    width: 126px;
+    height: 35px;
+    color: black;
+    font-size: 20px;
+    margin-left: 100px;
+    border-radius : 5px; 
+}

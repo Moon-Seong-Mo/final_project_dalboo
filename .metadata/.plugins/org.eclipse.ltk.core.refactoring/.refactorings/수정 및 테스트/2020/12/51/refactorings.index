@@ -1,0 +1,64 @@
+1607829270895	Rename resource 'NewFile.jsp'
+1607829597524	Rename resource 'ownerPageHeader.css'
+1607829613113	Rename resource 'NewFile.jsp'
+1607829638014	Rename resource 'ownerPagebase'
+1607829669108	Copy files
+1607829677218	Copy file
+1607829741325	Copy file
+1607839593690	Delete element
+1607840954132	Delete element
+1607841041236	Delete element
+1607927166910	Delete element
+1607927171234	Delete element
+1607947673701	Delete elements
+1607947680365	Delete elements
+1607947686661	Delete elements
+1607948279042	Move 'common' to 'WEB-INF'
+1607948320210	Delete element
+1607948336217	Delete element
+1607948796402	Move 3 resources to 'common'
+1607949449207	Delete element
+1607949472498	Delete element
+1607949586869	Delete element
+1607949786509	Delete element
+1607956017862	Move 6 resources to 'member'
+1607956029994	Move 'owner_material_order.jsp' to 'owner'
+1607956042317	Move 'member_info.jsp' to 'manager'
+1607956079568	Move 3 resources to 'views'
+1607964797123	Move 3 resources to 'manager'
+1607964977962	Move 3 resources to 'board'
+1607965514147	Move 'owner_main.css' to 'owner'
+1607965526836	Delete element
+1607965529563	Move 'owner_main.jsp' to 'owner'
+1607966238556	Move 'owner_notice_register.jsp' to 'manager'
+1607966831310	Move 'findPwdResult.css' to 'member'
+1608020561263	Delete element
+1608020717524	Delete elements
+1608021510465	Move 'store_list.css' to 'etc'
+1608021524135	Rename resource 'ect'
+1608021527928	Move 'store_list.jsp' to 'etc'
+1608021529829	Move 'faq.jsp' to 'etc'
+1608021543238	Move 'faq.css' to 'etc'
+1608021651620	Rename resource 'coffee'
+1608021666171	Move 'coffee_list.css' to 'etc'
+1608021670141	Move 'coffee_list.jsp' to 'etc'
+1608021749226	Move 2 resources to 'order'
+1608021754091	Move 2 resources to 'etc'
+1608021910958	Move 2 resources to 'order'
+1608025207162	Move 2 resources to 'etc'
+1608100954876	Copy files
+1608100961104	Delete elements
+1608101607025	Copy files
+1608101618591	Delete elements
+1608102149090	Copy files
+1608102155837	Delete elements
+1608102813848	Copy files
+1608102818856	Delete elements
+1608123757230	Move 'sirenorder_list.css' to 'WebContent'
+1608123764247	Move 'sirenorder_list.css' to 'css'
+1608123883537	Delete elements
+1608124018984	Move 'sirenorder_list.css' to 'order'
+1608124452045	Delete element
+1608124461194	Rename resource 'startup-procedure.css'
+1608124484734	Delete element
+1608124489775	Rename resource 'startup-procedure.jsp'

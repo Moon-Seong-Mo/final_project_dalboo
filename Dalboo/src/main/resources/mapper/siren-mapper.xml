@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sirenMapper">
+
+	<select id="NewMenuList" resultMap="StoreStockResultSet">
+	<![CDATA[
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+			FROM STORE_STOCK S
+				JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+			WHERE STORE_NUM = #{store_num}
+				AND STATUS = '승인'
+				AND ROWNUM <= 1
+				AND MATERIAL_TYPE = '신메뉴'
+				ORDER BY STOCK_NUM DESC
+	]]>
+	</select>
+	
+	<select id="CoffeeList" resultMap="StoreStockResultSet">
+	<![CDATA[
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+		FROM STORE_STOCK S
+			JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+		WHERE STORE_NUM = #{store_num}
+			AND STATUS = '승인'
+			AND ROWNUM <= 1
+			AND MATERIAL_TYPE = '커피'
+			ORDER BY STOCK_NUM DESC
+	]]>
+	</select>
+	
+	<select id="AdeList" resultMap="StoreStockResultSet">
+	<![CDATA[
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+		FROM STORE_STOCK S
+			JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+		WHERE STORE_NUM = #{store_num}
+			AND STATUS = '승인'
+			AND MATERIAL_TYPE = '음료'
+			AND ROWNUM <= 1
+			ORDER BY STOCK_NUM DESC
+	]]>
+	</select>
+	
+	<select id="DessertList" resultMap="StoreStockResultSet">
+	<![CDATA[
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+		FROM STORE_STOCK S
+			JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+		WHERE STORE_NUM = #{store_num}
+			AND STATUS = '승인'
+			AND MATERIAL_TYPE = '디저트'
+			AND ROWNUM <= 1
+			ORDER BY STOCK_NUM DESC
+	]]>
+	</select>
+	
+	<select id="choiceCoffee" resultMap="StoreStockResultSet">
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+		FROM STORE_STOCK S
+			JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+		WHERE STORE_NUM = #{store_num}
+			AND MATERIAL_TYPE ='커피'
+			AND STATUS = '승인'
+	</select>
+	
+	<select id="choiceAde" resultMap="StoreStockResultSet">
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+		FROM STORE_STOCK S
+			JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+		WHERE STORE_NUM = #{store_num}
+			AND MATERIAL_TYPE ='음료'
+			AND STATUS = '승인'
+	</select>
+	
+	<select id="choiceDessert" resultMap="StoreStockResultSet">
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+		FROM STORE_STOCK S
+			JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+		WHERE STORE_NUM = #{store_num}
+			AND MATERIAL_TYPE ='디저트'
+			AND STATUS = '승인'
+	</select>
+	
+	<select id="choiceNewMenu" resultMap="StoreStockResultSet">
+		SELECT STOCK_NUM, S.MATERIALNAME, MATERIALPRICE, RENAME_FILENAME, S.MATERIALAMOUNT
+		FROM STORE_STOCK S
+			JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+		WHERE STORE_NUM = #{store_num}
+			AND MATERIAL_TYPE ='신메뉴'
+			AND STATUS = '승인'
+	</select>
+
+			
+	<resultMap type="StoreStock" id="StoreStockResultSet">
+		<id 	column="STOCK_NUM" 		property="stock_num"/>
+		
+		<result column="MATERIALNAME" 	property="materialName"/>
+		<result column="MATERIALAMOUNT" property="materialAmount"/>
+		<result column="SS_UPLOAD_DATE" property="uploadDate"/>
+		<result column="STORE_NUM" 		property="store_num"/>
+		<result column="ALLSTOCKNUM" 	property="allStockNum"/>
+		
+		<result column="MATERIAL_TYPE"	property="material_type"/>
+		<result column="MATERIALPRICE"	property="materialprice"/>
+		<result column="RENAME_FILENAME" property="rename_filename"/>
+	</resultMap>
+	
+	<!-- MERGE INTO 를 통한 INSERT_UPDATE 문 -->
+	<update id="insertSOCart">
+		MERGE INTO SIRENORDER_CART
+		USING DUAL
+		ON(
+		    M_ID = #{m_id}
+		    AND STOCK_NUM = #{stock_num}
+		    AND STORE_NUM = #{store_num}
+		)
+		WHEN MATCHED THEN
+		UPDATE SET SO_CARTAMOUNT = SO_CARTAMOUNT+1
+		WHEN NOT MATCHED THEN
+		INSERT VALUES(SEQ_SOCNUM.NEXTVAL, DEFAULT, SYSDATE, #{stock_num}, #{m_id}, #{store_num})
+	</update>
+	
+	<!-- 주문 시 카트에 담기 -->
+	<insert id="">
+		INSERT INTO SIRENORDER_CART
+		VALUES(SEQ_SOCNUM.NEXTVAL, DEFAULT, SYSDATE, #{stock_num}, #{m_id}, #{store_num})
+	</insert>
+	<!-- 카트에 있는 메뉴번호 받아옴 -->
+	<select id="sameStockCheck" resultType="_int">
+		SELECT STOCK_NUM
+		FROM SIRENORDER_CART
+		WHERE M_ID = #{m_id}
+		 AND STORE_NUM = #{store_num}
+	</select>
+	<!-- 카트에 있는 메뉴를 담을 시 수량 증가 -->
+	<update id="updateAmountSOCart">
+		UPDATE SIRENORDER_CART
+		SET SO_CARTAMOUNT = SO_CARTAMOUNT+1
+		WHERE M_ID = #{m_id}
+		 AND STOCK_NUM = #{stock_num}
+		 AND STORE_NUM = #{store_num}
+	</update>
+	 
+	
+	<resultMap type="SirenOrderCart" id="socResultSet">
+   		<id 	property="so_cartNum" 		column="SO_CARTNUM"/>
+   		
+   		<result property="materialname" 			column="MATERIALNAME"/>
+   		<result property="materialprice" 			column="MATERIALPRICE"/>
+   		<result property="so_cartAmount" 	column="SO_CARTAMOUNT"/>
+   		<result property="so_cartDate" 		column="SO_CARTDATE"/>
+   		<result property="stock_num" 			column="STOCK_NUM"/>
+   		<result property="m_id" 			column="M_ID"/>
+   		
+   		<result property="store_name"		column="STORE_NAME"/>
+   		<result property="store_num"		column="STORE_NUM"/>
+   		<result property="allStockNum"		column="ALLSTOCKNUM"/>
+   		
+   		<result property="materialamount"	column="MATERIALAMOUNT"/>
+   </resultMap>
+	
+	<!-- 내 카트(장바구니) 목록 -->
+	<select id="selectCartList" resultMap="socResultSet">
+		SELECT MATERIALNAME, MATERIALPRICE, SO_CARTNUM, SO_CARTAMOUNT, RENAME_FILENAME,
+        		SO_CARTDATE, STORE_NAME, STORE_NUM, STOCK_NUM,SOC.MATERIALAMOUNT
+		FROM SOCLIST SOC
+    		JOIN COFFEESTOCK USING(ALLSTOCKNUM)
+    		WHERE M_ID = #{m_id} AND STORE_NUM = #{store_num}
+	</select>
+	
+	<!-- 카트 개별 삭제 -->
+	<resultMap type="SirenOrderCart" id="deleteResultSet">
+		<id 	property="so_cartNum" 		column="SO_CARTNUM"/>
+		<result property="m_id" 			column="M_ID"/>
+		<result property="store_num"		column="STORE_NUM"/>
+	</resultMap>
+	<select id="SirenOrderCart" resultMap="deleteResultSet">
+		SELECT SO_CARTNUM, M_ID, STORE_NUM
+		FROM SIRENORDER_CART
+   			JOIN STORE USING(STORE_NUM)
+   		WHERE SO_CARTNUM = #{so_cartNum}
+	</select>
+	<delete id="soDelete">
+		DELETE FROM SIRENORDER_CART
+		WHERE SO_CARTNUM = #{so_cartNum}
+	</delete>
+	
+	<!-- 수량 변경 -->
+	<update id="minusAmount">
+		UPDATE SIRENORDER_CART
+		SET SO_CARTAMOUNT = SO_CARTAMOUNT - 1
+		WHERE SO_CARTNUM = #{so_cartNum}
+	</update>
+	<update id="plusAmount">
+		UPDATE SIRENORDER_CART
+		SET SO_CARTAMOUNT = SO_CARTAMOUNT + 1
+		WHERE SO_CARTNUM = #{so_cartNum}
+	</update>
+	
+	<!-- 결제 완료 내역 저장 -->
+	<insert id="insertSirenOrder">
+		INSERT INTO SIRENORDER
+		VALUES(#{so_num}, #{so_total_price}, SYSDATE,
+			 #{so_time}, DEFAULT, DEFAULT, #{store_num}, #{m_id})
+	</insert>
+	
+	<insert id="insertOrderStock">
+		INSERT INTO SIRENORDER_STOCK VALUES(SEQ_SOTN.NEXTVAL, #{pk}, #{stockKey})
+	</insert>
+	
+	<select id="getOrderKey" resultType="_int">
+		SELECT SEQ_SONUM.NEXTVAL
+		FROM DUAL
+	</select>
+	
+	<!-- 주문 완료 내역 -->
+	<select id="coffee_orderList" resultMap="SirenOrderResultSet">
+		SELECT SO_NUM, SO_TOTAL_PRICE, SO_DATE, SO_TIME, SO_STATUS2, SO_STATUS, 
+				STORE_NUM, STORE_NAME, M_ID
+		FROM SIRENORDER
+			JOIN STORE USING(STORE_NUM)
+		WHERE M_ID = #{m_id}
+		ORDER BY SO_NUM DESC
+	</select>
+
+	<resultMap type="SirenOrder" id="SirenOrderResultSet">
+	<id property="so_num" column="SO_NUM"/>
+	
+	<result property="so_total_price" column="SO_TOTAL_PRICE"/>
+	<result property="so_date" column="SO_DATE"/>
+	<result property="so_time" column="SO_TIME"/>
+	<result property="so_status2" column="SO_STATUS2"/>
+	<result property="so_status" column="SO_STATUS"/>
+	<result property="store_num" column="STORE_NUM"/>
+	<result property="store_name" column="STORE_NAME"/>
+	<result property="m_id" column="M_ID"/>
+	<result property="materialname"		column="MATERIALNAME"/>
+	</resultMap>
+	
+	<!-- 결제 시점에 모든 카트 비움 -->
+	<delete id="makeEmptyCart">
+		DELETE FROM SIRENORDER_CART
+		WHERE M_ID = #{m_id}
+	</delete>
+	
+		<!-- 내 카트(장바구니) 목록 -->
+	<select id="getOrderStockList" parameterType="_int" resultType="string">
+		SELECT DISTINCT MATERIALNAME 
+		FROM SO_STOCK_VIEW
+		WHERE SO_NUM = #{so_num}
+	</select>
+	
+	
+	
+	<select id="getCoffeeListCount" resultType="_int">
+		select count(*)
+		from SIRENORDER
+		where m_id=#{id}
+	</select>
+	
+	
+	
+	
+	<!-- 결제 성공시 매장 매출 갱신 -->
+	<update id="storeSalesUpdate">
+		UPDATE STORE
+		SET TOTALPRICE = TOTALPRICE + #{totalprice}
+		WHERE STORE_NUM = #{store_num}
+	</update>
+	
+	
+	
+	
+</mapper>

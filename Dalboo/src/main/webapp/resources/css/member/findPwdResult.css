@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+div#findPwdResult {
+    font-size: 20px;
+    margin-top: 150px;
+}
+
+button#login,#home{
+	background: none;
+    border: 1px solid black;
+    margin-left: 50px;
+    margin-top: 30px;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    border-radius : 5px; 
+}

@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+h2{
+	margin-left: 20px;
+	display: inline-block;
+}
+
+.list {
+    border-top: 1px solid #303030;
+    border-bottom: 1px solid #303030;
+}
+.open-img{
+	background: url("../../../resources/images/open.PNG")no-repeat;
+	width: 40px;
+	height: 40px;
+	border: none;
+	cursor: pointer;
+	float: right;
+}
+.close-img{
+	background: url("../../../resources/images/close.PNG")no-repeat;
+	width: 40px;
+	height: 40px;
+	border: none;
+	cursor: pointer;
+	float: right;
+}
+.btn-img{
+	background: url("../../../resources/images/btn.PNG")no-repeat;
+	width: 40px;
+	height: 40px;
+	border: none;
+	cursor: pointer;
+	float: right;
+}
+#storelist{
+	width: 900px;
+	font-family: 'Nanum Gothic';
+    font-size: 20px;
+}
+#menutable1{
+display: none;
+}
+#menutable2{
+display: none;
+}
+#menutable3{
+display: none;
+}
+#menutable4{
+display: none;
+}
+#menutable5{
+display: none;
+}
+#btn2{
+	display: inline-block;
+    margin-left: 730px;
+}
+.contents {
+    margin: 0 auto;
+    width: 95%;
+}
+.sale{
+background-color: #34495E;
+color: white;
+text-align: center;
+width: 200px;
+padding: 15px;
+float: left;
+border: 10px solid #E0E0E0;
+}
+.bestmenu{
+	margin-left: 50px;
+}
+
+#refusal{
+	border: 0px;
+    outline: 0px;
+    background: gray;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+}
+#accept{
+	border: 0px;
+    outline: 0px;
+    background: rgb(44, 62, 80);
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+}

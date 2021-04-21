@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+.outer {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+}
+
+#topDiv {
+	color: gray;
+	font-size: 17px;
+	margin-top: 30px;
+}
+
+#bStyleText {
+	font-size: 25px;
+	color: rgb(64, 64, 64);
+}
+
+#bStyle {
+	font-size: 19px;
+}
+
+#explain {
+	font-size: 13px;
+	margin-top: 40px;
+}
+
+.dateBtn {
+	width: 80px;
+	height: 40px;
+	background: white;
+	border: 1px solid lightgray;
+}
+
+.dateBtn:hover {
+	background: lightgray;
+	cursor: pointer;
+}
+
+#tableArea {
+	border-collapse: collapse;
+	width: 1000px;
+	margin-top: 50px;
+}
+
+td {
+	height: 170px;
+}
+
+.imgTd {
+	width: 100px;
+	height: 150px;
+}
+
+#MdBtn {
+	width: 130px;
+	height: 30px;
+	background: rgb(227, 189, 152);
+	color: rgb(64, 64, 64);
+	font-size: 17px;
+	border: 0px;
+	border-radius: 5px;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	cursor: pointer;
+}
+
+/* 페이징 */
+#pagingArea {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.numBtn {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(244, 244, 244);
+	color: gray;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.Btn {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(244, 244, 244);
+	color: gray;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#choosen {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(227, 189, 152);
+	color: white;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+	cursor: pointer;
+}

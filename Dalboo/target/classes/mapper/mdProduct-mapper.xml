@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mdMapper">
+	
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from MD_PRODUCT
+		where MD_STATUS='Y'
+			and md_category = #{mdCategory}
+	</select>
+
+	<select id="selectList" resultMap="mdResultSet">
+		select *
+		from md_product
+		where md_status='Y'
+			and md_category = #{mdCategory}
+		order by MD_PRODUCTNUM desc
+	</select>
+	
+	<select id="selectfList" resultMap="fileResultSet">
+		select * 
+		from MD_FILES
+		where STATUS = 'Y' and PHOTO_LEVEL = 0
+	</select>
+	
+	<resultMap type="MdProduct" id="mdResultSet">
+		<id property="mdNum" column="MD_PRODUCTNUM"/>
+		<result property="mdCategory" column="MD_CATEGORY"/>
+		<result property="mdName" column="MD_NAME"/>
+		<result property="mdPrice" column="MD_PRICE"/>
+		<result property="mdMaterial" column="MD_MATERIAL"/>
+		<result property="mdCapacity" column="MD_CAPACITY"/>
+		<result property="mdStock" column="MD_STOCK"/>
+		<result property="updateDate" column="UPDATE_DATE"/>
+		<result property="modifyDate" column="MODYFI_DATE"/>
+		<result property="mdStatus" column="MD_STATUS"/>
+	</resultMap>
+	
+	<resultMap type="Files" id="fileResultSet">
+		<id property="fileNum" column="FILENUM"/>
+		<result property="originName" column="ORIGINNAME"/>
+		<result property="changeName" column="CHANGENAME"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="photoLevel" column="PHOTO_LEVEL"/>
+		<result property="boardNum" column="BOARD_NUM"/>
+		<result property="uploadDate" column="UPLOAD_DATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<insert id="insertMdProduct">
+		insert into md_product
+		values(SEQ_MDNUM.nextval, #{mdCategory}, #{mdName}, #{mdPrice}, #{mdMaterial}, #{mdCapacity}, #{mdStock}, sysdate, sysdate, default)
+	</insert>
+	
+	<insert id="insertFiles">
+		insert into MD_FILES
+		values(SEQ_MD_FILENUM.nextval, #{originName}, #{changeName}, #{filePath}, #{photoLevel}, SEQ_MDNUM.CURRVAL , sysdate, default)
+	</insert>
+	
+	
+	<!-- 게시물 & 파일 디테일 -->
+	<select id="selectDetail" resultMap="mdResultSet">
+		select * 
+		from md_product 
+		where MD_PRODUCTNUM=#{mdNum}
+	</select>
+	
+	<select id="selectFileDetail" resultMap="fileResultSet">
+		select *
+		from MD_FILES
+		where BOARD_NUM = #{mdNum}
+	</select>
+
+
+	<!-- 게시물 & 파일 수정 -->
+	<update id="updateMd">
+		update md_product
+		set md_category=#{mdCategory}, md_name=#{mdName}, md_price=#{mdPrice}, md_material=#{mdMaterial}, md_capacity=#{mdCapacity}, md_stock=#{mdStock}, MODYFI_DATE=sysdate
+		where md_productnum=#{mdNum}
+	</update>
+	
+	<update id="updateFile">
+		update MD_FILES
+		set ORIGINNAME= #{originName}, CHANGENAME = #{changeName},FILE_PATH = #{filePath},PHOTO_LEVEL = #{photoLevel}
+		where BOARD_NUM = #{boardNum} and FILENUM = #{fileNum}
+	</update>
+	
+	
+	<!-- 게시물 & 파일 삭제 -->
+	<update id="deleteMdProduct">
+		update md_product
+		set md_status='N'
+		where md_productnum = #{mdNum}
+	</update>
+	
+	<update id="deleteMdFile">
+		update MD_FILES
+		set status='N'
+		where board_num = #{mdNum}
+	</update>
+	
+	<!-- 재고 조곰 남은게 인기순?... 이건 나중에 상품 구매끝나고 봐야함 ㅠㅅㅠ -->
+	<select id="selectPopList" resultMap="mdResultSet">
+		select *
+		from md_product
+		where md_status='Y'
+			and md_category = #{mdCategory}
+		order by md_stock
+	</select>
+	
+	<resultMap type="Cart" id="cartResultSet">
+		<id property="cartNum" column="CARTNUM"/>
+		<result property="mdNum" column="MD_PRODUCTNUM"/>
+		<result property="mdName" column="MD_NAME"/>
+		<result property="mdPrice" column="MD_PRICE"/>
+		<result property="cartAmount" column="CART_AMOUNT"/>
+		<result property="mId" column="M_ID"/>
+		<result property="cartDate" column="CART_DATE"/>
+	</resultMap>
+	
+	<select id="selectCartList" resultMap="cartResultSet">
+		select * 
+		from cart
+		where m_id=#{id}
+		order by cartnum desc
+	</select>	
+		
+	<!-- 장바구니 -->	
+	<insert id="insertCart">
+		insert into cart
+		values(seq_cartnum.nextval,#{mdNum}, #{mdName},#{mdPrice}, #{cartAmount}, #{mId}, sysdate) 
+	</insert>	
+	
+	<select id="selectCartNum" resultMap="cartResultSet">
+		select *
+		from cart
+		where cartnum=#{cartNum}
+		order by cartnum desc
+	</select>
+	
+	<update id="cartRotn">
+		update cart 
+		set CART_AMOUNT = #{cartAmount}
+		where cartnum=#{cartNum}
+	</update>
+	
+	<delete id="deleteCart">
+		DELETE FROM CART 
+		WHERE CARTNUM = #{cartNum}
+	</delete>
+	
+	<select id="selectCartCheckList" resultMap="cartResultSet">
+		select *
+		from cart
+		where cartnum in (${chkArr})
+		order by cartnum desc
+	</select>
+	
+	
+	<!-- 결제완료 후 mdOrder에 값 저장 -->	
+	<insert id="insertMdOrder">
+		insert into md_order
+		values(seq_mdOrderNum.nextval, #{mdAmount}, #{totalPrice}, #{receiver}, #{address}, #{phone}, #{addressRequest}, sysdate, default, default, #{mId}, #{mdNum} )
+	</insert>
+	
+	<!-- 결제 완료 후 재고량 줄이기 -->
+	<update id="modifyDetailStock">
+	    update md_product
+	    set md_stock = (md_stock-#{amount})
+	    where md_productnum = #{mdNum}
+	</update>
+	
+	<!-- 장바구니에서 결제했으면 삭제해야한다. -->
+	<delete id="deleteBuyCart">
+		delete from cart
+		where MD_PRODUCTNUM=#{mdNum}
+	</delete>
+	
+	
+	<resultMap type="MdOrder" id="MdOrderResultSet">
+		<id property="mdOrderNum" column="MD_ORDERNUM"/>
+		<result property="mdAmount" column="MD_AMOUNT"/>
+		<result property="totalPrice" column="MD_TOTALPRICE"/>
+		<result property="receiver" column="MD_RECEIVER"/>
+		<result property="address" column="MD_ADDRESS"/>
+		<result property="phone" column="MD_PHONE"/>
+		<result property="addressRequest" column="MD_ADDRESS_REQUEST"/>
+		<result property="orderDate" column="MD_ORDER_DATE"/>
+		<result property="payStatus" column="MD_PAY_STATUS"/>
+		<result property="mdShipStatus" column="MD_SHIP_STATUS"/>
+		<result property="mId" column="M_ID"/>
+		<result property="mdNum" column="MD_PRODUCTNUM"/>
+	</resultMap>
+	
+	<!-- 주문목록 -->
+	<select id="getMdOrderListCount" resultType="_int">
+		select count(*)
+		from md_order
+		where M_ID=#{mId}
+	</select>
+	
+	<select id="selectMdOrderList" resultMap="MdOrderResultSet">
+		select *
+		from md_order
+		where m_id=#{mId}
+		order by md_ordernum desc
+	</select>
+	
+	<select id="selectMdOrderProduct" resultMap="mdResultSet">
+		select *
+		from md_product
+		where md_productnum = #{mdNum}
+	</select>
+	
+	<select id="selectMdOrderFile" resultMap="fileResultSet">
+		select *
+		from md_files
+		where photo_level = 0 and board_num = #{mdNum}
+	</select>
+	
+	
+	<!-- 페이징 -->
+	<select id="getOrderManagement" resultType="_int">
+		select count(*)
+		from md_order
+	</select>
+	
+	<select id="selectMdShipManagement" resultMap="MdOrderResultSet">
+		select *
+		from md_order
+		order by MD_ORDERNUM desc
+	</select> 
+	
+	<update id="shipEnd">
+		update md_order
+		set MD_SHIP_STATUS= 1
+		where MD_ORDERNUM=#{mdOrderNum}
+	</update>
+	
+	<update id="orderEnd">
+		update md_order
+		set MD_SHIP_STATUS= 2
+		where MD_ORDERNUM=#{mdOrderNum}
+	</update>
+	
+	<select id="countMdShipOne" resultType="_int">
+		select count(MD_SHIP_STATUS)
+		from md_order
+		where m_id = #{mId}
+ 		   and MD_SHIP_STATUS = 1
+	</select>
+	<select id="countMdShipTwo" resultType="_int">
+		select count(MD_SHIP_STATUS)
+		from md_order
+		where m_id = #{mId}
+ 		   and MD_SHIP_STATUS = 2
+	</select>
+	
+	<select id="selectOrderIngList" resultMap="MdOrderResultSet">
+		select *
+		from md_order
+		where MD_SHIP_STATUS = #{i}
+		order by MD_ORDERNUM desc
+	</select>
+	
+	
+	<!-- 가맹주페이지 MD총 매출 -->
+   <select id="selectMdAllSales" resultMap="mdResultSet">
+      SELECT MD_TOTALPRICE
+      FROM MD_ORDER
+   </select>
+	
+	
+	
+	
+	
+</mapper>

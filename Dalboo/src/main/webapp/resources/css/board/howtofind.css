@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+img#find {
+    width: 100%;
+    margin-top: 50px;
+}
+
+
+div#howtofind {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+table td{
+	text-align:left;
+	padding:15px
+}
+
+table th{
+	background : #f2e5d9;
+}
+
+table#bmw {
+    border-collapse: collapse;
+    /* margin: 0 auto; */
+    /* border-top: black; */
+    margin-left: 140px;
+    font-size: 17px;
+}

@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+h2 {
+    margin-left: 20px;
+}
+
+#startup_detail_area{
+	width:950px;
+	margin:0 auto;
+}
+
+#startup_content{
+	border: 2px solid black;
+    margin-top: 50px;
+    background: white;
+    border-radius: 27px;
+    font-size: 20px;
+    
+}
+
+table {
+    text-align: left;
+    margin-left: 20px;
+}
+
+th, td {
+    padding: 10px;
+ }
+th {
+    width: 160px;
+}
+
+
+ 
+#list{
+	border: 0px;
+   outline: 0px;
+   background: gray;
+   font-size: 15px;
+   font-weight: bold;
+   color:white;
+   width: 100px;
+   height: 30px;
+   margin-left: 360px;
+    margin-top: 50px;
+    border-radius: 5px;
+     cursor: pointer;
+     margin-bottom:50px;
+}
+
+
+#refusal{
+	border: 0px;
+   outline: 0px;
+   background: orangered;
+   font-size: 15px;
+   font-weight: bold;
+   color:white;
+   cursor: pointer;
+   width: 80px;
+   height: 30px;
+   border-radius: 5px;
+   
+}
+#delete{
+	border: 0px;
+    outline: 0px;
+    background: gray;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    margin-left: 193px;
+}
+#accept{
+	border: 0px;
+   outline: 0px;
+   background: rgb(44, 62, 80);
+   font-size: 15px;
+   font-weight: bold;
+   color:white;
+   cursor: pointer;
+   width: 80px;
+   height: 30px;
+   border-radius: 5px;
+   margin-bottom:50px;
+}
+
+#startUpContent{
+	border:none;
+	click:none;
+	resize: none;
+	outline: none;
+	cursor:default;
+	font-size:21px;
+}

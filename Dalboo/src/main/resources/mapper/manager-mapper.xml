@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper  namespace="managerMapper">
+  
+  <select id="getApplyListCount" resultType="_int">
+      select count(*)
+      from startup
+      where start_status='Y'
+   </select>
+  
+     <select id="selectApplyList" resultMap="StartUpResultSet">
+      select *
+      from startup 
+      where start_status='Y'
+      order by start_num desc
+   </select>
+   
+   <select id="selectApplydetail" resultMap="StartUpResultSet">
+      select * 
+      from startup
+      where start_num=#{sNum}   
+   </select>
+   
+   <resultMap type="StartUp" id="StartUpResultSet">
+      <id column="START_NUM" property="sNum"/>
+      <result column="START_TITLE" property="sTitle"/>
+      <result column="START_NAME" property="sName"/>
+      <result column="START_PHONE" property="sPhone"/>
+      <result column="START_EMAIL" property="sEmail"/>
+      <result column="START_STORE_NAME" property="storeName"/>
+      <result column="START_ADDRESS" property="sAddress"/>
+      <result column="START_CONTENT" property="sContent"/>
+      <result column="START_DATE" property="startDate"/>
+      <result column="START_CONFIRM" property="sConfirm"/>
+      <result column="START_STATUS" property="sStatus"/>
+   </resultMap>
+   
+   <update id="applyCheck">
+      update startup
+      set start_confirm = #{sConfirm}
+      where start_num=#{sNum} 
+   </update>
+   
+   <update id="deleteApply">
+      update startup
+      set start_status='N'
+      where start_num=#{sNum}
+   </update>
+   
+  <insert id="insertStore">
+       insert into
+       store
+       values(seq_stnum.nextval, #{store_region}, #{store_name}, #{store_address}, #{store_phone}, sysdate, sysdate,
+        #{store_login_code}, default, default, default)
+   </insert>
+   
+   <select id="searchApply" resultMap="StartUpResultSet">
+      select *
+      from startup 
+      where start_status='Y'
+      <if test="option.equals('제목')">
+      and start_title like '%'||#{text}||'%'
+      </if>
+      <if test="option.equals('작성자')">
+      and start_name like '%'||#{text}||'%'
+      </if>
+      order by start_num desc
+   </select>
+   
+
+   
+   <resultMap type="Store" id="StoreResultSet">
+      <id column="STORE_NUM" property="store_num"/>
+      <result column="STORE_REGION" property="store_region"/>
+      <result column="STORE_NAME" property="store_name"/>
+      <result column="STORE_ADDRESS" property="store_address"/>
+      <result column="STORE_PHONE" property="store_phone"/>
+      <result column="STORE_CREATE_DATE" property="store_create_date"/>
+      <result column="STORE_MODIFY_DATE" property="store_modify_date"/>
+      <result column="STORE_LOGIN_CODE" property="store_login_code"/>
+      <result column="STORE_STATUS" property="store_status"/>
+      <result property="rank_code" 		column="RANK_CODE"/>
+   </resultMap>
+   
+   
+   
+   
+   
+   
+   
+   
+   <resultMap type="CoffeeStock" id="CoffeeStockResultSet">
+      <id column="ALLSTOCKNUM" property="allStockNum"/>
+      <result column="MATERIAL_TYPE" property="materialType"/>
+      <result column="MATERIALNAME" property="materialName"/>
+      <result column="MATERIALAMOUNT" property="materialAmount"/>
+      <result column="MATERIALPRICE" property="materialPrice"/>
+      <result column="ORIGINAL_FILENAME" property="originalFileName"/>
+      <result column="RENAME_FILENAME" property="renameFileName"/>
+      <result column="MODIFY_DATE" property="modifyDate"/>
+   </resultMap>
+   
+
+
+   <resultMap type="StoreStock" id="StoreStockResultSet">
+      <id column="STOCK_NUM" property="stock_num"/>
+      <result column="MATERIALNAME" property="materialName"/>
+      <result column="MATERIALAMOUNT" property="materialAmount"/>
+      <result column="SS_UPLOAD_DATE" property="uploadDate"/>
+      <result column="STORE_NUM" property="store_num"/>
+   </resultMap>
+
+   <!-- 관리자 재료 추가 -->
+<!--    <insert id="insertStock"> -->
+<!--       insert into coffeestock -->
+<!--       values(SEQ_MATERIALNUM.nextval,#{materialName}, #{materialAmount},sysdate) -->
+<!--    </insert> -->
+
+   <!-- 관리자 재료 추가 -->
+   <insert id="insertStock">
+      insert into coffeestock
+      values(SEQ_MATERIALNUM.nextval,#{materialType},#{materialName}, #{materialAmount}, #{materialPrice}, 
+      #{originalFileName}, #{renameFileName}, sysdate)
+   </insert>
+   
+
+   
+   <!--  관리자가 가맹주들 발주한거 수락 거절 해주는 뷰(가맹주명,가맹주 주소 셀렉트)   -->
+   <select id="selectStore" resultMap="StoreResultSet">
+      select *
+      from store
+      where store_status='Y' and rank_code='1'
+      order by store_num
+   </select>
+   
+   <!--  관리자가 가맹주들 발주한거 수락 거절 해주는 뷰(재료 이름이랑 발주수량 셀렉트)   -->
+   <select id="selectStoreStock" resultMap="StoreStockResultSet">
+      select *
+      from store_stock
+      where status='대기'
+      order by stock_num
+   </select>
+   
+   
+   
+   
+
+   <!--  관리자가 가맹주들 발주한거 수락 및 거절 처리 + 수락하면 전체재고 수량 줄이기  -->
+   <update id="updateStatus">
+      update store_stock
+      set status = #{status}
+      where status = '대기'
+      and store_num = #{store_num}
+   </update>
+   
+   <update id="downStock">
+      update coffeestock
+      set materialamount  = materialamount - #{materialAmount}
+      where allstocknum = #{allStockNum} 
+   </update>
+   
+   
+<!--    납품 현황 페이징 처리 -->
+   <select id="getListCount" resultType="_int">
+      select count(*)
+      from store_stock
+      where status='승인'
+   </select>
+   
+   <!--  관리자 납품현황 봄(매장 이름,매장 주소 셀렉트)   -->
+   <select id="selectStorename" resultMap="StoreResultSet">
+      select *
+      from store
+      where store_status='Y'
+   </select>
+   
+   
+   <!--  관리자 납품현황 봄(재료 이름이랑 발주수량 셀렉트)   -->
+   <select id="selectDeliveryStatus" resultMap="StoreStockResultSet">
+      select *
+      from store_stock
+      where status='승인'
+      order by ss_upload_date desc
+   </select>
+   
+   <select id="selectStoreStockNum" resultMap="StoreStockResultSet">
+      select *
+      from store_stock
+      where store_num = #{store_num}
+      and status='대기'
+      order by stock_num
+   </select>
+   
+   
+   
+   
+   
+   
+    <update id="updateStock">
+      update coffeestock
+      set 
+          materialname = #{materialName},
+          materialamount = #{materialAmount},
+          material_type = #{materialType},
+          materialprice = #{materialPrice},
+          original_filename = #{originalFileName},
+          rename_filename = #{renameFileName}
+      where allstocknum = #{allStockNum}
+   </update>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <resultMap type="OwnerNewMenuBoard" id="OwnerNewMenuResultSet">
+		<id column="ONM_NUM" property="onmNum"/>
+		<result column="ONM_TITLE" property="onmTitle"/>
+		<result column="ONM_VIEWS" property="onmViews"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="ONM_STATUS" property="onmStatus"/>
+		<result column="STORE_NAME" property="storeName"/>
+	</resultMap>
+	
+	<resultMap type="OwnerNewMenuFiles" id="OwnerNewMenuFileResultSet">
+		<id column="OW_FILE_NUM" property="owFileNum"/>
+		<result column="ORIGINNAME" property="originalName"/>
+		<result column="CHANGENAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="CONTENT_TEXT" property="contentText"/>
+		<result column="STATUS" property="status"/>
+		<result column="BOARD_LEVEL" property="boardLevel"/>
+		<result column="ONM_NUM" property="onmNum"/>		
+	</resultMap>
+   
+   
+   
+   
+	<!--진욱 -->
+   <insert id="insertOnmBoard">
+		insert into 
+ 		owner_newmenu_of_month
+ 		values(seq_onm.nextval, #{onmTitle}, default,
+ 				sysdate, sysdate, default, #{storeName})
+	</insert>
+	<insert id="insertOnmFiles">
+		insert into
+ 		owner_newmenu_files
+ 		values(seq_ownf_num.nextval, #{originalName}, #{changeName}, #{filePath}, #{contentText}, default, default, seq_onm.currval)
+	</insert>
+	
+	<insert id="addinsertOnmFiles">
+		insert into
+ 		owner_newmenu_files
+ 		values(seq_ownf_num.nextval, #{originalName}, #{changeName}, #{filePath}, #{contentText}, default, default,#{onmNum})
+	</insert>
+	
+	<select id="getMenuListCount" resultType="_int">
+		select count(*)
+		from owner_newmenu_of_month 
+		where onm_status='Y'
+	</select>
+	
+	<select id="selectOwnerMenuList" resultMap="OwnerNewMenuResultSet">
+		select *
+		from owner_newmenu_of_month 
+		where onm_status='Y'
+		order by onm_num desc
+	</select>
+	
+	<select id="selectNewMenuBoard" resultMap="OwnerNewMenuResultSet">
+		select * 
+		from owner_newmenu_of_month
+		where onm_num=#{onmNum} and onm_status='Y'
+	</select>
+	
+	<select id="selectNewMenuFile"  resultMap="OwnerNewMenuFileResultSet">
+		select *
+		from owner_newmenu_files
+		where onm_num=#{onmNum} and status='Y'
+	</select>
+	
+	<update id="addViewsCount">
+		update owner_newmenu_of_month 
+		set onm_views = onm_views + 1
+		where onm_num = #{onmNum} 
+	</update>
+	
+	<update id="deleteNewMenu">
+		update owner_newmenu_of_month
+		set onm_status='N'
+		where onm_num=#{onmNum} 
+	</update>
+	
+	<update id="updateOnmFilesContent">
+		update owner_newmenu_files
+		set content_text = #{contentText}
+		where ow_file_num = #{owFileNum}
+	</update>
+	
+	<update id="updateONmboard">
+		update owner_newmenu_of_month
+		set onm_title=#{onmTitle}
+		where onm_num = #{onmNum} 
+	</update>
+	
+	<update id="updateONMfile">
+		update owner_newmenu_files
+		set originname=#{originalName},
+		changename=#{changeName},
+		file_path=#{filePath},
+		content_text=#{contentText}
+		where ow_file_num=#{owFileNum}
+	</update>
+	
+	<update id="rollbackUpdate">
+		update owner_newmenu_files
+		set status='Y'
+		where onm_num = #{onmNum} 
+	</update>
+	
+	<update id="deleteNewMenuFile">
+		update owner_newmenu_files
+		set status='N'
+		where ow_file_num=#{#fNum}
+	</update>
+   
+   
+   
+   <select id="ownerLogin" resultMap="StoreResultSet">
+      select *
+      from store
+      where STORE_NAME = #{store_name}
+           and store_status='Y'
+   </select>
+   
+   
+   
+   <select id="searchNewMenu" resultMap="OwnerNewMenuResultSet">
+      select *
+      from owner_newmenu_of_month 
+      where onm_status='Y'
+      <if test="option.equals('제목')">
+      and onm_title like '%'||#{text}||'%'
+      </if>
+      <if test="option.equals('작성자')">
+      and store_name like '%'||#{text}||'%'
+      </if>
+      order by onm_num desc
+   </select>
+   
+   
+   
+   
+</mapper>

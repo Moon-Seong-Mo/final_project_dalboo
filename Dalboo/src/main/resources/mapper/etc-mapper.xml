@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="etcMapper">
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM STORE
+		WHERE STORE_STATUS = 'Y'
+	</select>
+	
+	<select id="selectList" resultMap="StoreResultSet">
+		SELECT *
+		FROM STORE
+		WHERE STORE_STATUS = 'Y' AND RANK_CODE = 1
+		ORDER BY STORE_NUM DESC
+	</select>
+	
+	<resultMap type="Store" id="StoreResultSet">
+		<id 	property="store_num" 		column="STORE_NUM"/>
+		<result property="store_region" 	column="STORE_REGION"/>
+		<result property="store_name" 		column="STORE_NAME"/>
+		<result property="store_address" 	column="STORE_ADDRESS"/>
+		<result property="store_phone" 		column="STORE_PHONE"/>
+		<result property="store_create_date" column="STORE_CREATE_DATE"/>
+		<result property="store_modify_date" column="STORE_MODIFY_DATE"/>
+		<result property="store_login_code" column="STORE_LOGIN_CODE"/>
+		<result property="store_status" 	column="STORE_STATUS"/>
+		<result property="rank_code" 		column="RANK_CODE"/>
+		<result property="totalprice"		column="TOTALPRICE"/>
+	</resultMap>
+	
+	
+	<select id="selctStore" resultMap="StoreResultSet">
+		SELECT *
+		FROM STORE
+		WHERE STORE_STATUS = 'Y'
+			AND STORE_NUM = #{store_num}
+	</select>
+	
+	<update id="updateStore">
+		UPDATE STORE
+		SET STORE_NAME = #{store_name},
+			STORE_REGION = #{store_region},
+			STORE_ADDRESS = #{store_address},
+			STORE_PHONE = #{store_phone},
+			STORE_MODIFY_DATE = SYSDATE
+		WHERE STORE_NUM = #{store_num}
+	</update>
+	
+	<update id="deleteStore">
+		UPDATE STORE
+		SET STORE_STATUS = 'N'
+		WHERE STORE_NUM = #{store_num}
+	</update>
+	
+	<!-- <select id="getSearchListCount" parameterType="SearchLocation" resultMap="StoreResultSet">
+		SELECT * 
+		FROM STORE
+		WHERE S_STATUS = 'Y'
+		<choose>
+			<when test=""></when>
+		</choose>
+	</select> -->
+	
+	<select id="faqList" resultMap="FAQResultSet">
+		SELECT *
+		FROM FAQ
+		WHERE STATUS = 'Y'
+	</select>
+	
+	<resultMap type="FAQ" id="FAQResultSet">
+		<id 	property="faq_num" 		column="FAQ_NUM"/>
+		
+		<result property="faq_title" 	column="FAQ_TITLE"/>
+		<result property="faq_content" 	column="FAQ_CONTENT"/>
+		<result property="status" 		column="STATUS"/>
+	</resultMap>
+	
+	
+	
+	<insert id="addApply">
+     insert into
+ 		startup
+ 		values(seq_suid.nextval, #{sTitle}, #{sName}, #{sPhone}, #{sEmail}, #{storeName},
+ 				#{sAddress}, #{sContent}, sysdate, default, default)
+  </insert>
+  
+  
+  
+  
+  
+  <!-- 매장검색 -->
+   <select id="getSearchListCount" resultType="_int">
+       SELECT COUNT(*)
+      FROM STORE
+      WHERE STORE_STATUS = 'Y' AND RANK_CODE = 1
+      <if test="option.equals('지역')">
+      AND STORE_REGION LiKE '%'||#{Text}||'%'
+      </if>
+      <if test="option.equals('매장명')">
+      AND STORE_NAME LiKE '%'||#{Text}||'%'
+      </if>
+      <if test="option.equals('주소')">
+      AND STORE_ADDRESS LiKE '%'||#{Text}||'%'
+      </if>
+   </select>
+   
+   <select id="searchStoreList" resultMap="StoreResultSet">
+        SELECT *
+        FROM STORE 
+         WHERE STORE_STATUS = 'Y' AND RANK_CODE = 1
+         <if test="option.equals('지역')">
+         AND STORE_REGION LiKE '%'||#{Text}||'%'
+         </if>
+         <if test="option.equals('매장명')">
+         AND STORE_NAME LiKE '%'||#{Text}||'%'
+         </if>
+         <if test="option.equals('주소')">
+         AND STORE_ADDRESS LiKE '%'||#{Text}||'%'
+         </if>
+         ORDER BY STORE_NUM DESC
+   </select>
+	
+	
+	
+	
+	
+</mapper>

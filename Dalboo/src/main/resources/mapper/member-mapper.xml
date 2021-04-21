@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+
+	<!--  비밀번호 암호화 하여 로그인 -->
+	<select id="selectOne" resultMap="memberResultSet">
+		select *
+		from member
+		where m_id=#{id}
+			  and m_status='Y'
+	</select>
+	<!--  쿼리 작성할 때 컬럼명이랑 일치하는지 꼭 확인하기 ㅠ -->
+	
+	<resultMap type="Member" id="memberResultSet">
+		<id property="id" column="M_ID"/>
+		<result property="pwd" column="M_PWD"/>
+		<result property="nickName" column="M_NICKNAME"/>
+		<result property="name" column="M_NAME"/>
+		<result property="phone" column="M_PHONE"/>
+		<result property="email" column="M_EMAIL"/>
+		<result property="point" column="M_POINT"/>
+		<result property="rank_code" column="M_RANK_CODE"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="modifyDate" column="MODIFY_DATE"/>
+		<result property="mStatus" column="M_STATUS"/>
+	</resultMap>
+	
+	<insert id="joinMember">
+		insert into member
+		values(#{id}, #{pwd}, #{nickName}, #{name}, #{phone}, #{email}, #{point} ,default, sysdate, sysdate, default)
+	</insert>
+	
+	<update id="updateMember">
+		update member set
+		m_name = #{name}, 
+		m_email = #{email}, 
+		m_nickname = #{nickName}, 
+		m_phone = #{phone}
+		where m_id=#{id}
+	</update>
+	
+	
+	<update id="updatePwd">
+		UPDATE MEMBER 
+		SET M_PWD = #{newPwd}
+		WHERE M_ID=#{id}
+	</update>
+	
+	<update id="updatePwdtemp">
+		UPDATE MEMBER SET
+		M_PWD = #{newPwd}
+		WHERE M_ID = #{id} and M_EMAIL = #{email}
+	</update>
+	
+	<select id="checkIdDup" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE M_ID=#{id}
+	</select>
+	
+	
+	
+	
+	<select id="findId" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE m_name=#{name} and m_email=#{email} and m_phone=#{phone}
+	</select>
+
+
+	<!-- 이메일 중복확인 -->
+	<select id="emailCertify" parameterType="hashMap" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE M_ID= #{id} AND M_EMAIL=#{email} 
+		AND M_STATUS= 'Y'
+	</select>
+	
+	
+	
+	<!-- 가입된 이메일인지 확인 -->
+	<select id="signUpedEmail" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE M_EMAIL= #{email}
+		AND M_STATUS= 'Y' 
+	</select>
+
+
+	
+	<update id="updatePwdemail">
+		UPDATE MEMBER SET
+		M_PWD = #{newPwd}
+		WHERE M_EMAIL = #{email}
+	</update>
+
+
+
+
+	
+	<resultMap type="Address" id="addressResultSet">
+		<id property="adNum" column="A_NUM"/>
+		<result property="adName" column="A_NAME"/>
+		<result property="adReceiver" column="A_RECEIVER"/>
+		<result property="adAddress" column="A_ADDRESS"/>
+		<result property="adPhone" column="A_ADDRESSPHONE"/>
+		<result property="id" column="M_ID"/>
+		<result property="adBaseAddress" column="A_BASE_ADDRESS"/>
+		<result property="status" column="A_STATUS"/>
+	</resultMap>
+	
+	<select id="selectAddressDefault" resultType="_int"> 
+		select count(*)
+		from member_address
+		where m_id = #{id}
+					and a_status='Y'
+	</select>
+	
+	<insert id="insertAddressDefault">
+		insert into MEMBER_ADDRESS
+		values(SEQ_MD_FILENUM.nextval, #{adName}, #{adReceiver}, #{adAddress}, #{adPhone}, #{id} , 1, default)
+	</insert>
+		
+	<insert id="insertAddress">
+		insert into MEMBER_ADDRESS
+		values(SEQ_MD_FILENUM.nextval, #{adName}, #{adReceiver}, #{adAddress}, #{adPhone}, #{id} , default, default)
+	</insert>
+	
+	<select id="selectAddress" resultMap="addressResultSet">
+		select *
+		from MEMBER_ADDRESS
+		where m_id = #{id}
+			and a_status='Y'
+		order by A_NUM desc
+	</select>
+	
+	<update id="deleteAddress">
+		update MEMBER_ADDRESS
+		set a_status = 'N'
+		where a_num = #{adNum}
+	</update>
+	
+	
+	
+	<!-- 처음에 모두 디폴트 값으로 바꾸기 -->
+	<update id="updateBaseDefault">
+		update member_address
+		set a_base_address = 0
+		where m_id = #{id}
+	</update>
+	
+	<update id="updateBaseAdd">
+		update member_address
+		set a_base_address = 1		
+		where a_num = #{adNum}
+	</update>
+	
+	
+	
+	
+	<!-- 포인트 -->
+	<resultMap type="PointHistory" id="PHResultSet">
+		<id property="phNum" column="PH_NUM" />
+		<result property="mId" column="M_ID"/>
+		<result property="event" column="EVENT"/>
+		<result property="conditions" column="CONDITIONS"/>
+		<result property="originPoint" column="ORIGIN_POINT"/>
+		<result property="changePoint" column="CHANGE_POINT"/>
+		<result property="afterPoint" column="AFTER_POINT"/>
+		<result property="eventDate" column="EVENTDATE"/>
+	</resultMap>
+	
+	
+	<insert id="insertMemberUpdatePoint">
+		insert into point_history
+		values(seq_phNum.nextval, #{mId}, #{event}, #{conditions}, #{originPoint}, #{changePoint}, #{afterPoint}, sysdate)
+	</insert>
+	
+	<!-- 사용, 적립 받은 member 포인트 업데이트하기 -->
+	<update id="updateMemberPoint">
+		update member
+		set m_point = #{point}
+		where m_id=#{id}
+	</update>
+	
+	<select id="getPointListCount" resultType="_int">
+		select count(*)
+		from point_history
+		where m_id = #{mId}
+	</select>
+	
+	<select id="pointHistoryList" resultMap="PHResultSet">
+		select *
+		from point_history
+		where m_id = #{mId}
+		order by ph_num desc
+	</select>
+
+
+
+	<update id="deleteMember">
+      update member
+      set M_STATUS = 'N'
+      where M_ID=#{id}
+   </update>
+</mapper>

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.footer{
+  width: 100%;
+padding-top: 20px;
+text-align:center;
+}
+
+.line{
+   width:100%; height:5px;      
+   background : rgb(227, 189, 152);
+}
+
+#bottom_logo{
+   display: inline-block;
+   margin-left:50px; margin-top:20px;
+}   
+#notice{
+   display: inline-block;   
+   margin-left:150px;
+   text-align:center;
+   font-family: 'Nanum Gothic';
+   font-size:14px;
+}
+.link{
+   display: inline-block;   
+   margin-left:280px;   
+   margin-bottom:20px;
+}
+.link>a>img{
+	width:60px; height:60px;
+}
+

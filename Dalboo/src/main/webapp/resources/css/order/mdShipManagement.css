@@ -1,0 +1,82 @@
+@charset "UTF-8"; 
+
+.outer {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	margin-bottom: 50px;
+}
+
+h2 {
+	margin-top: 150px;
+}
+
+#tableArea {
+	margin-top: 50px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 1000px;
+	margin-top: 50px;
+}
+
+.imgTd {
+	width: 90px;
+	height: 90px;
+}
+
+#btnArea {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+#shipBtn {
+	background-color: rgb(227, 189, 152);
+	color: rgb(33, 33, 33);
+	font-size: 17px;
+	border: 0px;
+	border-radius: 3px;
+	margin-right: 10px;
+	width: 100px;
+	height: 30px;
+	margin-bottom: 10px;
+	cursor:pointer;
+}
+
+.pagingArea {
+	margin-top: 50px;
+}
+
+.numBtn {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(244, 244, 244);
+	color: gray;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+	cursor:pointer;
+}
+
+.Btn {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(244, 244, 244);
+	color: gray;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+	cursor:pointer;
+}
+
+#choosen {
+	font-size: 17px;
+	border: 0px;
+	background-color: rgb(227, 189, 152);
+	color: white;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+}

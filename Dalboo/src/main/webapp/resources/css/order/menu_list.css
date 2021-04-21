@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+.main-slide-container {
+	  overflow:hidden;
+      width:100%;
+      height: 100%;
+}
+
+.outer{
+	width: atuo; 
+	height: auto; 
+	background: rgba(255, 255, 255, 0.4); 
+	border: 5px solid white;
+	margin-left: auto; 
+	margin-right: auto; 
+	margin-top: 50px; 
+	margin-bottom:50px;
+	position:relative;
+	padding:0 150px;
+	vertical-align:middle;
+	text-align:center;	
+}
+#tab-btn {
+	text-align:center;
+	margin:0 auto;
+	margin-bottom: 100px;
+}
+#tab-btn li{
+	text-align: center;
+    display: inline-block;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 0px 50px;
+}
+#tab-btn li:hover{
+	font-weight:bold;
+}
+
+.menu-list-div{
+	width:319px; 
+	height:282px; 
+	display:inline-block;
+	margin: 20px;
+	z-index:2;
+	font-size:20px;
+	position: relative;
+    text-align: center;
+}
+#menuimg{
+    width: 319px;
+    height: 250px;
+    position: absolute;
+    left: 0;
+/*     top:30px; */
+}
+
+
+.menu-detail{
+	opacity:0;
+	background-color:#f2e5d9;
+	width:100%;
+	height:90%;
+	margin: 0 auto;
+	font-size:15px;
+}
+
+
+.menu_name {
+	font-size:23px;
+	    padding: 10px;
+}
+
+
+
+.menu_content{
+	height: 119px;
+	text-align:left;
+	margin-left:15px;
+}
+
+.menu_incontent_table{
+	position: absolute;
+/*     bottom: 29px; */
+
+}
+
+
+.menu_size{
+	font-size:20px;
+}
+
+.menu_incontent {
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    color: #000;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.menu_incontent li div {
+    padding: 3px 5px;
+    display: inline-block;
+}
+.menu_incontent li div:nth-child(2n){
+    text-align: right;
+    float: right;
+}
+
+
+
+.menu_incontent li:nth-child(2n - 1){
+    border-right: 1px solid #555;
+ }
+
+.menu_incontent li{
+    display: inline-block;
+    width:49%;
+}
+
+
+
+
+/* footer */	
+#footer{
+		
+	background-color:#E3BD98;
+	padding-bottom:10px;
+}
+.footer_text {
+	font-family: "留묒� 怨좊뵓";
+	font-size: 15px;
+	padding:50px auto auto auto;
+	color: black;
+	text-align: center;
+	
+}	
+#pagingArea button{
+	border: 0px;
+	outline: 0px;
+	background: none;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+#insert-btn{
+	background-color: #E3BD98;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	margin-top: 50px;
+}
+#reset-btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+}
+
+div#menu-area {
+    text-align: left;
+}
+
+
+a{
+	color: black;
+    text-decoration: none;
+}
+
+input#del_menu {
+    background: red;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    border: 0;
+    margin-left: 298px;
+}

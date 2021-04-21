@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+	
+	
+	<resultMap type="Board" id="boardResultSet">
+      <id column="B_NUM" property="bNum"/>
+      <result column="B_TYPE" property="bType"/>
+      <result column="B_WRITER" property="bWriter"/>
+      <result column="B_TITLE" property="bTitle"/>
+      <result column="B_CONTENT" property="bContent"/>
+      <result column="ORIGINAL_FILENAME" property="originalFileName"/>
+      <result column="RENAME_FILENAME" property="renameFileName"/>
+      <result column="B_VIEWS" property="bViews"/>
+      <result column="B_CREATE_DATE" property="bCreateDate"/>
+      <result column="B_MODIFY_DATE" property="bModifyDate"/>
+      <result column="B_STATUS" property="bStatus"/>
+   </resultMap>
+   
+<!-- 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ이벤트 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+   
+   
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from event_board
+		where b_status='Y' and b_type='이벤트' 
+	</select>
+	
+	<select id="selectList" resultMap = "boardResultSet">
+		select *
+		from event_board
+		where b_status='Y'and b_type='이벤트' 
+		order by b_num desc 
+	</select>
+	  
+   
+   <insert id="insertBoard">
+      insert into event_board
+      values(seq_eventnum.nextval, '이벤트' , #{bWriter}, #{bTitle}, #{bContent},#{originalFileName}, #{renameFileName},
+            default, sysdate, sysdate, default)
+   </insert>
+   
+   
+   <update id="addReadCount">
+		update event_board
+		set b_views = b_views +1
+		where b_num = #{bNum}
+	</update>
+	
+	<select id="selectBoard" resultMap="boardResultSet">
+		select *
+		from event_board
+		where b_num =#{bNum} and b_status='Y' and b_type='이벤트'
+	</select>
+	
+	
+	<update id="updateBoard">
+      UPDATE EVENT_BOARD SET
+      B_TITLE = #{bTitle},
+      B_CONTENT = #{bContent},
+      RENAME_FILENAME = #{renameFileName},
+      
+      <if test="originalFileName != null">
+	      ORIGINAL_FILENAME = #{originalFileName},
+      </if>
+      B_MODIFY_DATE = sysdate
+      WHERE B_NUM= #{bNum}
+   </update>
+   
+   <update id="deleteBoard">
+   		update event_board
+   		set b_status='N'
+   		where b_num=#{bNum}
+   </update>
+   
+   
+   
+   
+   
+<!-- 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ공지사항 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<select id="getListCount2" resultType="_int">
+		select count(*)
+		from notice_board
+		where b_status='Y' and b_type='공지사항' 
+	</select>
+	
+	<select id="selectList2" resultMap = "boardResultSet">
+		select *
+		from notice_board
+		where b_status='Y' and b_type='공지사항' 
+		order by b_num desc 
+	</select>
+
+   <insert id="insertBoard2">
+      insert into notice_board
+      values(seq_noticenum.nextval, '공지사항'  , #{bWriter}, #{bTitle}, #{bContent},#{originalFileName}, #{renameFileName},
+            default, sysdate, sysdate, default)
+   </insert>
+   
+   
+   <update id="addReadCount2">
+		update notice_board
+		set b_views = b_views +1
+		where b_num = #{bNum}
+	</update>
+	
+	<select id="selectBoard2" resultMap="boardResultSet">
+		select *
+		from notice_board
+		where b_num =#{bNum} and b_status='Y' and b_type='공지사항'
+	</select>
+	
+	
+	<update id="updateBoard2">
+      UPDATE NOTICE_BOARD SET
+      B_TITLE = #{bTitle},
+      B_CONTENT = #{bContent},
+      RENAME_FILENAME = #{renameFileName},
+      
+      <if test="originalFileName != null">
+	      ORIGINAL_FILENAME = #{originalFileName},
+      </if>
+      B_MODIFY_DATE = sysdate
+      WHERE B_NUM= #{bNum}
+   </update>
+   
+   <update id="deleteBoard2">
+   		update notice_board
+   		set b_status='N'
+   		where b_num=#{bNum}
+   </update>
+   
+   
+ <!-- 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ고객센터 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<select id="getListCount3" resultType="_int">
+		select count(*)
+		from customer_service
+		where b_status='Y' and b_type='고객센터' 
+	</select>
+	
+	<select id="selectList3" resultMap = "boardResultSet">
+		select *
+		from customer_service
+		where b_status='Y' and b_type='고객센터' 
+		order by b_num desc 
+	</select>
+	
+	  <insert id="insertBoard3">
+      insert into customer_service
+      values(seq_csnum.nextval, '고객센터' , #{bWriter}, #{bTitle}, #{bContent},#{originalFileName}, #{renameFileName},
+            default, sysdate, sysdate, default)
+   </insert>
+   
+   
+   <update id="addReadCount3">
+		update customer_service
+		set b_views = b_views +1
+		where b_num = #{bNum}
+	</update>
+	
+	<select id="selectBoard3" resultMap="boardResultSet">
+		select *
+		from customer_service
+		where b_num =#{bNum} and b_status='Y' and b_type='고객센터'
+	</select>
+	
+	
+	<update id="updateBoard3">
+      UPDATE CUSTOMER_SERVICE SET
+      B_TITLE = #{bTitle},
+      B_CONTENT = #{bContent},
+      RENAME_FILENAME = #{renameFileName},
+      
+      <if test="originalFileName != null">
+	      ORIGINAL_FILENAME = #{originalFileName},
+      </if>
+      B_MODIFY_DATE = sysdate
+      WHERE B_NUM= #{bNum}
+   </update>
+   
+   <update id="deleteBoard3">
+   		update customer_service
+   		set b_status='N'
+   		where b_num=#{bNum}
+   </update>
+   
+   
+   
+    <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ댓글 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+   <resultMap type="Reply" id="replyResultSet">
+         <id property = "rId" column="RID"/>
+         <result property="rContent" column="RCONTENT"/>
+         <result property="refBid" column="REF_BID"/>
+         <result property="rWriter" column="RWRITER"/>
+         <result property="rCreateDate" column="R_CREATE_DATE"/>
+         <result property="rModifyDate" column="R_MODIFY_DATE"/>
+         <result property="rStatus" column="R_STATUS"/>
+   </resultMap>
+   
+   
+   <select id="selectReplyList" resultMap="replyResultSet">
+      select *
+      from  reply
+      where ref_bid = #{bNum}
+      and r_Status='Y'
+      order by rid desc  
+   </select>
+   
+   <insert id="insertReply">
+         insert into reply
+         values(seq_rid.nextval,#{rContent}, #{refBid},#{rWriter},sysdate,sysdate,default)
+   </insert>
+   
+   <update id="deleteReply">
+      update reply
+      set r_Status='N'
+      where rid=#{rId}
+   </update>
+   
+
+
+</mapper>

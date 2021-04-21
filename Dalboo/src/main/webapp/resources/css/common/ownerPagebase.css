@@ -1,0 +1,191 @@
+body{  
+	font-family: 'Nanum Gothic';font-size:14px;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	
+	
+	
+	height: 100%;
+	
+	
+}
+
+header, #nav{
+	border: 0;
+}
+
+header{
+	width:100%;
+	min-height:80px;
+	background-color: white;
+}
+#headerBtnArea{
+	display:inline-block;	
+}
+#logoutBtnOwner{
+	background-color:white;
+	cursor:pointer;
+	border:none;
+}
+
+
+#logoImg{
+	width:200px; 
+	height:100px;
+}
+#wrap {
+	background-color: #E0E0E0;
+	position:relative;
+	width:100%;
+	min-height:900px;
+}
+#nav {
+	float: left;
+	background-color: #2C3E50;
+	width:250px;
+	height:100%;
+	position:absolute;
+}
+#section{
+/* 	background-color: #E0E0E0; */
+	width:85%;
+/* 	width:1100px; */
+/* 	min-height:900px; */
+	min-height:940px;
+	margin-left:250px;
+}
+
+
+#ul-nav> li > ul{
+	display:none;
+	color:white;
+	cursor:pointer;
+}
+
+.owner-Btn{
+	float:right;
+	line-height:10px;
+	height:17.2px;
+	margin-right:50px;
+	margin-top:50px;
+	background-color:white;
+	border:none;
+	font-size:11.5px;
+	color:gray;
+	cursor:pointer;
+	word-spacing:10px;
+}
+
+
+/* 사이드메뉴 css */
+#nav > ul > li{
+    margin-top: 30px;
+    margin-right: 50px;
+    line-height: 35px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    list-style: none;
+    width: 95%;
+}
+
+
+#nav > ul > li:hover{
+/* 	background-color:white; */
+	border-radius:5px;
+	color:white;
+	width:95%;
+}
+
+
+#nav > ul > li > p:hover{
+/* 	background-color:white; */
+	background-color:#FF3636;
+	border-radius:5px;
+	color:white;
+	width:95%;
+}
+
+
+
+#nav >  ul > li > a :hover {
+/*     background-color: white; */
+    background-color: #FF3636;
+    border-radius: 5px;
+/*     color: black; */
+    color: white;
+    width:95%;
+}
+
+
+
+#nav >  ul > li > a{
+	text-decoration: none;
+    border-radius: 5px;
+    color: white;
+}
+
+
+
+
+.main_menu:hover{
+	background-color:#FF3636;
+	border-radius:5px;
+	width:95%;
+}
+
+.main_menu{
+	text-decoration: none;
+    border-radius: 5px;
+    color: white;
+    
+}
+
+
+
+#tag-title{
+	font-size:15px;
+	font-weight:bold;
+	color:white;
+}
+
+.sub_menu a{
+	 text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+
+.sub_menu>li a{
+   color:black;
+}
+.sub_menu>li a:hover {
+    color: black;
+     font-weight: bold;
+}   
+
+
+.sub_menu>li{
+	padding:10px;
+}
+
+
+ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    margin-left: 15px;
+}
+
+
+.sub_menu{
+		display:none;
+	}
+.sub_menu li a:hover{
+	color:white;
+}

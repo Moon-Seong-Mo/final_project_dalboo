@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+div#update_info {
+    margin-top: 100px;
+}
+#updatepwd {
+   background: lightgray;
+   border-radius: 5px;
+   border: 1px solid lightgray;
+   width: 100px;
+   height: 30px;
+   margin-top:10px;
+}
+
+#updateinfo {
+   background: rgb(227, 189, 152);
+   border-radius: 5px;
+   border: none;
+   width: 92px;
+   height: 40px;
+   color: black;
+   font-size: 17px;
+   font-weight: bold;
+}
+#cancel {
+   background: lightgray;
+   border-radius: 5px;
+   border: none;
+   width: 92px;
+   height: 40px;
+   color: black;
+   font-size: 17px;
+   font-weight: bold;
+}
+
+table{
+	margin-left: 450px;
+    font-size: 20px;
+    text-align: left;
+    border-spacing: 30px;
+}

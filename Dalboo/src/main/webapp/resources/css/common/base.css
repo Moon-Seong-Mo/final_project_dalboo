@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+body{
+	font-family: 'Nanum Gothic';
+}
+
+html, body {
+	margin :0;
+	padding : 0;
+}
+
+.frame{
+   width: 1200px;
+   margin: auto;
+}
+
+.wrap {
+	vertical-align:middle;
+	text-align:center;
+/* 	width:1400px; */
+	width:1500px;
+	min-height:900px;
+	margin:auto;
+}
+
+
+
+
+
+

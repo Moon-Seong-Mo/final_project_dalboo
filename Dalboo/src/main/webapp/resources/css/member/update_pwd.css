@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+table#pwd_table {
+    margin: 0 auto;
+}
+
+th {
+    padding: 15px;
+}
+
+#cancel {
+   background: lightgray;
+   border-radius: 5px;
+   border: none;
+   width: 95px;
+   height: 40px;
+   color: black;
+   font-size: 17px;
+   font-weight: bold;
+}
+
+#updateinfo {
+   background: rgb(227, 189, 152);
+   border-radius: 5px;
+   border: none;
+   width: 100px;
+   height: 40px;
+   color: black;
+   font-size: 17px;
+   font-weight: bold;
+   margin-left:10px;
+}
+
+h1 {
+    margin-left: 70px;
+}

@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+h2{
+	margin-left: 20px;
+	display: inline-block;
+}
+
+.contents {
+    padding: 2% 7% 0 3%;
+    margin: 0 auto;
+}
+.sale{
+background-color: #34495E;
+color: white;
+text-align: center;
+width: 200px;
+padding: 15px;
+float: left;
+border: 10px solid #E0E0E0;
+}
+
+
+.sale2{
+background-color: #34495E;
+    color: white;
+    text-align: center;
+    width: 280px;
+    padding: 15px;
+    float: left;
+    border: 10px solid #E0E0E0;
+    height: 250px;
+    margin-top: 69px;
+}
+
+.bestmenu{
+margin-left: 550px;
+margin-bottom: 150px; 
+}
+#head{
+background-color: rgb(227, 189, 152);
+
+}
+.notice{
+border-bottom: 1px solid black;
+border-collapse: collapse;
+width: 840px;
+}
+
+ p#donut_title {
+    font-size: 35px;
+	text-align:center;
+}
+

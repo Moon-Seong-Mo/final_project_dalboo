@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+#slide-div{
+	background-color: lightgray;
+	background-size:cover;
+}
+section {
+	margin-top: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 600px;
+	width: 800px;
+	text-align:center;
+}
+.outer {
+	margin-left: auto;
+	margin-right: auto;		
+	margin-top: 50px;	
+	margin-bottom: 50px;
+	min-height: 540px;
+	width: 800px;
+	border: 3px solid black;
+}
+
+	.detailArea {
+	margin-top: 20px;
+	margin-left: 100px;
+	margin-right: 100px;
+	
+}
+#tableArea {
+	width: 100%;
+}
+#title-td {
+	margin-top: 20px;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: left;
+}
+#writer-td {
+	text-align: left;
+}
+#date-td {
+	text-align: right;
+}
+#file-td{
+	text-align: right;
+	border-bottom: 1px solid black;
+}
+td#file-td {
+    font-size: 15px;
+}
+input[type=file]{
+	width:180px;
+}
+input[type=text]{
+	height:25px;
+	width: 535px;
+}
+#contents {
+	width: 600px;
+	height: 350px;
+	resize: none;
+	border: none;
+	outline: none;
+	font-family: "나눔고딕";
+	font-size:15px;
+	click: none;
+	margin-bottom:50px;
+}
+#sbm-btn{
+	background-color: #E3BD98;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor: pointer;
+}
+#res-btn{
+	background-color: lightgray;
+	border:0px;
+	width:100px;
+	height:50px;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:5px;
+	cursor: pointer;
+}
+#btnDiv{
+	    margin-bottom: 15px;
+}
+
+input[type="text"] {
+    width: 542px;
+}

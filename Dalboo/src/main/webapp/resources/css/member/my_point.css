@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+#my_point_area{
+	margin : 0 auto;
+	width : 80%;
+}
+
+h1{
+	text-align: left;
+}
+
+#point-label{
+	margin-top: 43px;
+}
+
+#point{
+	font-size: 28px;
+    font-weight: bold;
+}
+
+#pLogo{
+	width: 45px;
+    height: 40px;
+    position: relative;
+    top: 8px;
+}
+
+#table-area{
+	margin-top: 45px;
+}
+
+#pTable{
+	width: 100%;
+    font-size: 22px;
+}
+
+#line{
+	border-collapse: collapse;
+}
+
+#solid td{
+	border-bottom: 3px solid lightgray;
+}
+
+#dotted td{
+	border-bottom: 5px dotted lightgray;
+}
+
+#pTable thead{
+	text-align: center;
+}
+
+#pTable tbody{
+	text-align: center;
+}
+
+#accumulation{
+	border: 5px solid #f4e5d6;
+    border-radius: 60px;
+    color: #f4e5d6;
+    font-weight: bold;
+    font-size: 30px;
+    height: 100px;
+}
+
+#using{
+	border: 5px solid orange;
+    border-radius: 60px;
+    color: orange;
+    font-weight: bold;
+    font-size: 30px;
+    height: 100px;
+}
+
+#empty td{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+
+/* 페이징 처리 */
+#pagingArea{
+    margin-top: 30px;
+}
+
+button:hover{
+   cursor: pointer;
+}  
+
+.numBtn{
+   border: 0px; 
+   background-color:rgb(244, 244, 244);
+   width:30px; 
+   height:30px; 
+   border-radius:5px;
+}
+   
+.Btn{
+   border: 0px; 
+   background-color: rgb(244, 244, 244); 
+   width:30px; 
+   height:30px; 
+   border-radius:5px;
+}
+
+#choosen{
+   border: 0px; 
+   background-color: rgb(227, 189, 152); 
+   color:white; 
+   width:30px; 
+   height:30px; 
+   border-radius:5px;
+}
+
+
+

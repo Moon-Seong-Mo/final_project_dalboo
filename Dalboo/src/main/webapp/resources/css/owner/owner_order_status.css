@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+@font-face { /* 나눔고딕 Regular */
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf) format('truetype');
+}
+h2{
+	margin-left:20px; 
+}
+
+table{
+    width: 95%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+    margin: 0 auto;
+    margin-left: 20px;
+}
+	
+#tr1>th {
+   height: 50px;
+   background: rgb(52, 73, 94);
+   color:white;
+}
+	
+td{
+	height:40px; 
+	border-bottom:1px solid gray;
+	text-align: center;
+}
+	
+button:hover{
+	cursor: pointer;
+}  
+
+.numBtn{
+	border: 0px; 
+	background-color: rgb(190, 190, 190); 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+}
+	
+.Btn{
+	border: 0px; 
+	background-color: rgb(190, 190, 190); 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+}
+
+#choosen{
+	border: 0px; 
+	background-color: rgb(52, 73, 94); 
+	color:white; 
+	width:30px; 
+	height:30px; 
+	border-radius:5px;
+}
+
+div#pagingArea {
+    margin-top: 30px;
+}
